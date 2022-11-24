@@ -1,6 +1,6 @@
 import React from "react";
 
-const Service = () => {
+const ServiceBanner = () => {
   return (
     <div>
       <div className="hero bg-base-200 py-4 mb-10">
@@ -15,4 +15,4 @@ const Service = () => {
   );
 };
 
-export default Service;
+export default ServiceBanner;

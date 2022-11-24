@@ -27,7 +27,7 @@ const Navbar = () => {
             {menuItems}
       </ul>
     </div>
-    <a className="btn btn-ghost normal-case text-2xl text-[#033e38] font-bold"> <img style={{ width: '50px' }} src={logo} alt="" /> LensMart</a>
+    <Link className="btn btn-ghost normal-case text-2xl text-[#033e38] font-bold"> <img style={{ width: '50px' }} src={logo} alt="" /> LensMart</Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal p-0 font-semibold">
@@ -35,7 +35,7 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn btn-outline btn-sm"><FaSignOutAlt /></a>
+    <Link className="btn btn-outline btn-sm"><FaSignOutAlt /></Link>
   </div>
 </div>
     );
