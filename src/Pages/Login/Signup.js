@@ -30,14 +30,16 @@ const Signup = () => {
             };
             updatedProfile(updatedUser)
               .then(() => {
-                userSaveToDB(data.name, data.email);
+                userSaveToDB(data.name, data.email, data.image);
               })
               .catch((error) => console.log(error));
 
             form.reset();
+            
 
         })
-        .catch( error => console.error(error))
+        .catch( error => console.error(error));
+       
     }
 
     const handlegoogleLogin = () =>{
@@ -53,7 +55,7 @@ const Signup = () => {
 
     const userSaveToDB = (name, email) =>{
       const user = { name, email}
-      
+
     fetch("http://localhost:5000/users",{
       method: "POST",
       headers: {
@@ -63,7 +65,6 @@ const Signup = () => {
     })
     .then(res => res.json())
     .then(data => console.log(data))
-
   }
     return (
 
@@ -91,7 +92,7 @@ const Signup = () => {
           <label className="label">
             <span className="label-text">Photo</span>
           </label>
-          <input  {...register("")} type="file" placeholder="email" className="input input-bordered" />
+          <input  {...register("image")} type="file" placeholder="email" className="input input-bordered" />
         </div> */}
 
         <div className="form-control">

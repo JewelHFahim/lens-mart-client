@@ -19,10 +19,13 @@ const Navbar = () => {
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link>Shop</Link>
+        <Link to="/cameras" >Cameras</Link>
       </li>
       <li>
-        <Link>Service</Link>
+        <Link to="/lens" >Lens</Link>
+      </li>
+      <li>
+        <Link to="/accessories" >Accessories</Link>
       </li>
     </>
   );
@@ -54,8 +57,7 @@ const Navbar = () => {
             {menuItems}
           </ul>
         </div>
-        <Link className="btn btn-ghost normal-case text-2xl text-[#033e38] font-bold">
-          {" "}
+        <Link to ="/" className="btn btn-ghost normal-case text-2xl text-[#033e38] font-bold">
           <img style={{ width: "50px" }} src={logo} alt="" /> LensMart
         </Link>
       </div>
