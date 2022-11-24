@@ -1,29 +1,48 @@
-// import { GoogleAuthProvider } from 'firebase/auth';
+import { GoogleAuthProvider } from "firebase/auth";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-// import { UserContext } from '../Context/AuthContext';
+import { toast } from "react-toastify";
+import { UserContext } from "../../Context/AuthContext";
+
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  // const { logIn } = useContext(UserContext);
+  const { logIn, googleLogin } = useContext(UserContext);
+  const googleProvider = new GoogleAuthProvider();
 
-  const hadnleSignup = (data) => {
+  const hadnleLogin = (data, event) => {
+    const form = event.target;
     console.log(data);
-    // logIn(data.email, data.password)
-    // .then(result => {
-    //     const user = result.user;
-    //     console.log(user);
-    // })
-    // .catch( error => console.error(error))
+
+    logIn(data.email, data.password)
+    .then(result => {
+        const user = result.user;
+        console.log(user);
+        toast.success('Login Success');
+        form.reset();
+    })
+    .catch( error => console.error(error))
   };
 
+  const handlegoogleLogin = () =>{
+   
+
+    googleLogin(googleProvider)
+    .ten(result => {
+      const user = result.user;
+      console.log(user);
+      toast.success('Login Success');
+    })
+    .catch(error=>console.log(error))
+  }
+
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="hero my-10">
       <div className="hero-content flex-col">
         <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
         <p className='text-3xl text-center mt-2'>Login</p>
-          <form className="card-body" onSubmit={handleSubmit(hadnleSignup)}>
+          <form className="card-body" onSubmit={handleSubmit(hadnleLogin)}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -42,7 +61,7 @@ const Login = () => {
               </label>
               <input
                 {...register("password")}
-                type="text"
+                type="password"
                 placeholder="password"
                 className="input input-bordered"
               />
@@ -56,6 +75,7 @@ const Login = () => {
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
+          <button onClick={handlegoogleLogin} className="btn btn-outline border border-primary hover:bg-primary mx-8 mb-3 text-primary font-bold">Google</button>
         </div>
       </div>
     </div>

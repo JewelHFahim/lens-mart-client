@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import logo from "../../../Assets/logo.png";
+import { UserContext } from "../../../Context/AuthContext";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(UserContext);
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => console.log(error));
+  };
+
   const menuItems = (
     <>
       <li>
-        <Link>Home</Link>
+        <Link to="/">Home</Link>
       </li>
       <li>
         <Link>Shop</Link>
@@ -54,12 +63,17 @@ const Navbar = () => {
         <ul className="menu menu-horizontal p-0 font-semibold">{menuItems}</ul>
       </div>
       <div className="navbar-end">
-        <Link className="btn btn-outline btn-sm">
+      <p className="mr-2">{user?.displayName}</p>
+      {
+        user?.email ?
+        <Link onClick={handleLogout} className="btn btn-outline btn-sm">
           <FaSignOutAlt />
         </Link>
-        <Link className="btn btn-outline btn-sm">
+        :
+        <Link to="/login" className="btn btn-outline btn-sm">
           Login
         </Link>
+      }
       </div>
     </div>
   );
