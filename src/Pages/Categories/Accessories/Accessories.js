@@ -33,7 +33,7 @@ const Accessories = () => {
               </p>
               <div className=" text-left mt-4">
                 <p className="text-lg font-bold text-primary">
-                  Price: ${accessory.price}
+                  Price: ${accessory.sale}
                 </p>
                 <p>Duration: {accessory.duration} mon</p>
                 <p>Location: {accessory.location}</p>

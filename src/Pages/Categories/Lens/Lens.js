@@ -33,7 +33,7 @@ const Lens = () => {
               </p>
               <div className=" text-left mt-4">
                 <p className="text-lg font-bold text-primary">
-                  Price: ${lens.price}
+                  Price: ${lens.sale}
                 </p>
                 <p>Duration: {lens.duration} mon</p>
                 <p>Location: {lens.location}</p>

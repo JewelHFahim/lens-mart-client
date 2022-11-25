@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Cameras = () => {
   const [cameras, setCameras] = useState([]);
@@ -16,7 +16,7 @@ const Cameras = () => {
       <h1 className="text-3xl text-center my-5">Cameras Section</h1>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {cameras.map((camera) => (
-          <div className="card bg-base-100 shadow-xl">
+          <div key = {camera._id} className="card bg-base-100 shadow-xl">
             <figure className="p-5">
               <img src={camera.img} alt="" />
             </figure>
@@ -25,15 +25,16 @@ const Cameras = () => {
                 {camera.title}
               </h2>
               <p>
-                {camera.des.length > 100 ? (
-                  <div>{camera.des.slice(0, 100) + "..."}</div>
-                ) : (
-                  <p>{camera.des}</p>
-                )}
+                {/* {
+                  camera.des.length  > 5 ? 
+                  <div>{camera.des.slice(0, 100)}</div> : <p>{camera.des}</p>
+                } */}
               </p>
+              {/* <p>{camera.des}</p> */}
+
               <div className=" text-left mt-4">
                 <p className="text-lg font-bold text-primary">
-                  Price: ${camera.price}
+                  Price: ${camera.sale}
                 </p>
                 <p>Duration: {camera.duration} mon</p>
                 <p>Location: {camera.location}</p>

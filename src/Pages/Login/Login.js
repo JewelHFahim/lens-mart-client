@@ -7,7 +7,9 @@ import { UserContext } from "../../Context/AuthContext";
 
 
 const Login = () => {
+
   const { register, handleSubmit } = useForm();
+  
   const { logIn, googleLogin } = useContext(UserContext);
   const googleProvider = new GoogleAuthProvider();
 
@@ -38,7 +40,7 @@ const Login = () => {
   }
 
   return (
-    <div className="hero my-10">
+    <div className="lg:w-5/12 mx-auto my-10">
       <div className="hero-content flex-col">
         <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100">
         <p className='text-3xl text-center mt-2'>Login</p>

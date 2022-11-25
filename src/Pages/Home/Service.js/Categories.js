@@ -21,11 +21,6 @@ const Categories = () => {
           <div className="card-body">
             <h2 className="card-title ">{cat.name}</h2>
             <p className="">{cat.des}</p>
-            {/* <div className="card-actions justify-end">
-              <Link to = {`/${cat.cat}`}>
-                <button className="btn btn-primary">Buy Now</button>
-              </Link>
-            </div> */}
           </div>
         </Link>
       ))}
