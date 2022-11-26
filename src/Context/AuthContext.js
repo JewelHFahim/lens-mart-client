@@ -8,6 +8,7 @@ const AuthContext = ({children}) => {
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
 
+
     const createUser = (email, password) =>{
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
@@ -43,7 +44,15 @@ const AuthContext = ({children}) => {
         }
     },[])
 
-    const authInfo = { user, createUser, logIn, logOut, googleLogin, updatedProfile, loading }
+    const [dbUser, setDbUser] = useState([]);
+    useEffect(()=>{
+        fetch("http://localhost:5000/users")
+        .then(res => res.json())
+        .then(data => setDbUser(data) )
+      },[])
+    
+
+    const authInfo = { user, createUser, logIn, logOut, googleLogin, updatedProfile, loading, dbUser }
 
     return (
        <UserContext.Provider value={authInfo} >

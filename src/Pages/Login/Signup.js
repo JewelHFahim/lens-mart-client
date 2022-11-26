@@ -2,13 +2,12 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Toaster } from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, Navigate} from "react-router-dom";
 import { UserContext } from "../../Context/AuthContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Signup = () => {
-
 
   const { register, handleSubmit } = useForm();
   const { createUser, googleLogin, updatedProfile } = useContext(UserContext);
@@ -30,11 +29,11 @@ const Signup = () => {
         };
         updatedProfile(updatedUser)
           .then(() => {
-            userSaveToDB( data.name, data.email, data.designation);
+            userSaveToDB( data.name, data.email, data.role);
           })
           .catch((error) => console.log(error));
-
         form.reset();
+        <Navigate to = "/" ></Navigate>
       })
       .catch((error) => console.error(error));
   };
@@ -49,8 +48,8 @@ const Signup = () => {
       .catch((error) => console.log(error));
   };
 
-  const userSaveToDB = ( name, email, designation) => {
-    const user = { name, email, designation };
+  const userSaveToDB = ( name, email, role) => {
+    const user = { name, email, role };
 
     fetch("http://localhost:5000/users", {
       method: "POST",
@@ -98,7 +97,7 @@ const Signup = () => {
           <div>
           <label className="label"><span className="label-text">Join As</span></label>
 
-            <select {...register("designation")} required className="select select-bordered w-full">
+            <select {...register("role")} required className="select select-bordered w-full">
               <option defaultValue={"Buyer"} >Buyer</option>
               <option>Seller</option>
             </select>
