@@ -8,6 +8,7 @@ import Cameras from "../Pages/Categories/Cameras/Cameras";
 import Lens from "../Pages/Categories/Lens/Lens";
 import LensDetails from "../Pages/Categories/Lens/LensDetails";
 import AllUser from "../Pages/Dashboard/AllUser";
+import SellerDashboard from "../Pages/Dashboard/SellerDashboard/SellerDashboard";
 import UserDashboard from "../Pages/Dashboard/UserDashboard";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
           {
             path: "/dashboard",
             element: <PrivateRouter><UserDashboard></UserDashboard></PrivateRouter>
+          },
+          {
+            path: "/dashboard/seller",
+            element: <PrivateRouter><SellerDashboard></SellerDashboard></PrivateRouter>
           },
           {
             path: "/dashboard/allusers",

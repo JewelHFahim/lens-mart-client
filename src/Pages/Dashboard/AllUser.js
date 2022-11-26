@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { UserContext } from '../../Context/AuthContext';
 
 const AllUser = () => {
 
-    const { dbUser } = useContext(UserContext);
+    const { dbUser, loading } = useContext(UserContext);
 
     const handleDeleteDocotor = (id) => {
       fetch(`http://localhost:5000/users/${id}`,{
@@ -22,7 +22,6 @@ const AllUser = () => {
     const handleMakeAdmin = (id) => {
       fetch(`http://localhost:5000/users/admin/${id}`, {
         method: "PUT",
-
       })
         .then((res) => res.json())
         .then((data) => {
@@ -32,6 +31,9 @@ const AllUser = () => {
         });
     };
   
+    if(loading){
+      return <progress className="progress w-56"></progress>
+  }
 
     return (
         <div>

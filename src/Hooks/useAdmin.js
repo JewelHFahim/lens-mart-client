@@ -1,19 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 const useAdmin = (email) => {
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdminLoading, setsAdminLoading] = useState(true);
 
-    const [isAdmin, setIsAdmin] = useState(false);
-
-    useEffect(()=>{
-        if(email){
-            fetch(`http://localhost:5000/users/admin/${email}`)
-        .then(res => res.json())
-        .then(data => {
-            setIsAdmin(data.isAdmin)
+  useEffect(() => {
+    if (email) {
+      fetch(`http://localhost:5000/users/admin/${email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setIsAdmin(data.isAdmin);
+          setsAdminLoading(false);
         });
-        }
-    },[email])
-    return [isAdmin]
+    }
+  }, [email]);
+  return [isAdmin, isAdminLoading];
 };
 
 export default useAdmin;
