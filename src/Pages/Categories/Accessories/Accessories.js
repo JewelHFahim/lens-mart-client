@@ -14,23 +14,16 @@ const Accessories = () => {
   return (
     <div>
       <h1 className="text-3xl text-center my-5">Accessories Section</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {accessories.map((accessory) => (
           <div className="card bg-base-100 shadow-xl">
             <figure className="p-5">
-              <img src={accessory.img} alt="" />
+              <img src={accessory?.products?.img} alt="" />
             </figure>
-            <div className="card-body">
+            <div className="px-5 pb-5">
               <h2 className="card-title justify-center text-neutral">
                 {accessory.title}
               </h2>
-              <p>
-                {accessory.des.length > 100 ? (
-                  <div>{accessory.des.slice(0, 100) + "..."}</div>
-                ) : (
-                  <p>{accessory.des}</p>
-                )}
-              </p>
               <div className=" text-left mt-4">
                 <p className="text-lg font-bold text-primary">
                   Price: ${accessory.sale}

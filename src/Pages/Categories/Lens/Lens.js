@@ -14,29 +14,24 @@ const Lens = () => {
   return (
     <div>
       <h1 className="text-3xl text-center my-5">Lens Section</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {lenses.map((lens) => (
           <div className="card bg-base-100 shadow-xl">
             <figure className="p-5">
-              <img src={lens.img} alt="" />
+              <img src={lens.products.img} alt="" />
             </figure>
-            <div className="card-body">
+            <div className="mx-5 mb-5">
               <h2 className="card-title justify-center text-neutral">
-                {lens.title}
+                {lens.products.title}
               </h2>
-              <p>
-                {lens.des.length > 100 ? (
-                  <div>{lens.des.slice(0, 100) + "..."}</div>
-                ) : (
-                  <p>{lens.des}</p>
-                )}
-              </p>
               <div className=" text-left mt-4">
+              <small className="my-1">{lens.date}</small>
+
                 <p className="text-lg font-bold text-primary">
-                  Price: ${lens.sale}
+                  Price: ${lens.products.sale}
                 </p>
-                <p>Duration: {lens.duration} mon</p>
-                <p>Location: {lens.location}</p>
+                <p>Duration: {lens.products.duration} mon</p>
+                <p>Location: {lens.products.location}</p>
               </div>
 
               <div className="card-actions justify-end">

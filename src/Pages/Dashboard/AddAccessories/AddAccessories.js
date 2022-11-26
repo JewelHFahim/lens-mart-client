@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const AddCamera = ({dbUser}) => {
+const AddAccessories = ({dbUser}) => {
 
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
@@ -11,7 +11,7 @@ const AddCamera = ({dbUser}) => {
 
 const imgHostKey = process.env.REACT_APP_imgbb_key;
 
-const handleAddCamera = (data, event) => {
+const handleAddAccessories = (data, event) => {
   event.preventDefault();
   const form = event.target;
   const image = data.img[0];
@@ -39,7 +39,7 @@ const handleAddCamera = (data, event) => {
           sale: data.sale,
           img: imgData.data.url,
         };
-        fetch("http://localhost:5000/cameras", {
+        fetch("http://localhost:5000/accessories", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -51,7 +51,7 @@ const handleAddCamera = (data, event) => {
             console.log(data);
             form.reset();
             toast.success('added Successfylly');
-            navigate("/cameras");
+            navigate("/accessories");
           });
       }
     });
@@ -60,11 +60,11 @@ const handleAddCamera = (data, event) => {
   return (
     <div>
     
-      <input type="checkbox" id="my-camera" className="modal-toggle" />
+      <input type="checkbox" id="my-accessories" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box w-11/12 max-w-5xl">
-          <h3 className="font-bold text-lg">Add Camera</h3>
-          <form className="card-body" onSubmit={handleSubmit(handleAddCamera)}>
+          <h3 className="font-bold text-lg">Add Accessories</h3>
+          <form className="card-body" onSubmit={handleSubmit(handleAddAccessories)}>
             {/* 1st row */}
             <div className="flex justify-center">
 
@@ -115,9 +115,9 @@ const handleAddCamera = (data, event) => {
             </div>
             </div>
             
-            <label htmlFor="my-camera" className="btn btn-primary btn-sm btn-circle absolute right-2 top-2">✕</label>
+            <label htmlFor="my-accessories" className="btn btn-primary btn-sm btn-circle absolute right-2 top-2">✕</label>
             <div className="form-control modal-action mt-6">
-              <button htmlFor="my-camera" className="btn btn-primary">Submit</button>
+              <button htmlFor="my-accessories" className="btn btn-primary">Submit</button>
             </div>
 
           </form>
@@ -127,4 +127,4 @@ const handleAddCamera = (data, event) => {
   );
 };
 
-export default AddCamera;
+export default AddAccessories;

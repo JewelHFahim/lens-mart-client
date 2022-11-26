@@ -6,7 +6,7 @@ const AccessoriesDetails = () => {
 
   const {user} = useContext(UserContext)
 
-  const details = useLoaderData();
+  const details = useLoaderData().products;
   const { title, img, sale, des, brand, condition, duration, location, buy } = details;
 
   return (

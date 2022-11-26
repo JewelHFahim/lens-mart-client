@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import AddAccessories from './AddAccessories/AddAccessories';
 import AddCamera from './AddCamera/AddCamera';
+import AddLens from './AddLens/AddLens';
 
 const UserDashboard = () => {
     const [dbUser, setDbUser] = useState([]);
@@ -16,14 +18,20 @@ const UserDashboard = () => {
             
             <h1 className=' text-3xl my-10'>hello </h1>
 
-            <label htmlFor="my-modal" className="btn">+ Cameras</label>
-            <button className='btn mx-2'>+ Lens</button>
-            <button className='btn'>+ Accessories</button>
+            <label htmlFor="my-camera" className="btn">+ Cameras</label>
+            <label htmlFor="my-lens" className='btn mx-2'>+ Lens</label>
+            <label htmlFor="my-accessories" className='btn mx-2'>+ Accessories</label>
 
             {/* <AddCamera></AddCamera> */}
 
             {
                 dbUser.map(dbUser => <AddCamera key={dbUser._id} dbUser={dbUser} ></AddCamera>)
+            }
+            {
+                dbUser.map(dbUser => <AddLens key={dbUser._id} dbUser={dbUser} ></AddLens>)
+            }
+            {
+                dbUser.map(dbUser => <AddAccessories key={dbUser._id} dbUser={dbUser} ></AddAccessories>)
             }
         </div>
     );
