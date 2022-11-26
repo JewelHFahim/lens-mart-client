@@ -13,6 +13,7 @@ import UserDashboard from "../Pages/Dashboard/UserDashboard";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Login/Signup";
+import OrderModal from "../Pages/Orders/OrderModal";
 import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
 import PrivateRouter from "./PrivateRouter";
 
@@ -77,6 +78,11 @@ const router = createBrowserRouter([
             path: "/dashboard/seller",
             element: <PrivateRouter><SellerDashboard></SellerDashboard></PrivateRouter>
           },
+          {
+            path: 'dashboard/cameras/:id',
+            element: <OrderModal></OrderModal>,
+            loader: ({params})=> fetch(`http://localhost:5000/dashboard/cameras/${params.id}`)
+        },
           {
             path: "/dashboard/allusers",
             element: <AllUser></AllUser>

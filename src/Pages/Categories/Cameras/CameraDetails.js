@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { UserContext } from "../../../Context/AuthContext";
+import OrderModal from "../../Orders/OrderModal";
 
 const CameraDetails = () => {
 
@@ -31,9 +32,10 @@ const CameraDetails = () => {
             user?.email && <p className="pb-2 font-semibold"> Seller: {user?.displayName} </p>
           }
           <p className="pb-2"> {des} </p>
-          <button className="btn btn-primary my-6">Book Now</button>
+          <label htmlFor="addProduct" className="btn btn-primary my-6">Book Now</label>
         </div>
       </div>
+      <OrderModal></OrderModal>
     </div>
   );
 };
