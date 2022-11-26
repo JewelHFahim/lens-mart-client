@@ -1,32 +1,61 @@
-import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddCamera = ({dbUser}) => {
+
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const { _id } = dbUser;
 
 
-  const handleAddCamera = (data, event) => {
-    const form = event.target;
-    console.log(data);
-    userSaveToDB(_id, data.title, data.des, data.brand, data.condition, data.duration, data.location, data.buy, data.sale)
-  };
+const imgHostKey = process.env.REACT_APP_imgbb_key;
 
-  const userSaveToDB = (_id, title, des, brand, condition, duration, location, buy, sale) => {
-    const product = { user_id: _id, title, des, brand, condition, duration, location, buy, sale };
-
-    fetch("http://localhost:5000/cameras", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(product),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data));
-  };
-
-
+const handleAddCamera = (data, event) => {
+  event.preventDefault();
+  const form = event.target;
+  const image = data.img[0];
+  console.log(image);
+  const formData = new FormData();
+  formData.append("image", image);
+  const url = `https://api.imgbb.com/1/upload?key=${imgHostKey}`;
+  fetch(url, {
+    method: "POST",
+    body: formData,
+  })
+    .then((res) => res.json())
+    .then((imgData) => {
+      if (imgData.success) {
+        console.log(imgData.data.url);
+        const product = {
+          _id,
+          title: data.title,
+          des: data.des,
+          brand: data.brand,
+          condition: data.condition,
+          duration: data.duration,
+          location: data.location,
+          buy: data.buy,
+          sale: data.sale,
+          img: imgData.data.url,
+        };
+        fetch("http://localhost:5000/cameras", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(product),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            form.reset();
+            toast.success('added Successfylly');
+            navigate("/cameras");
+          });
+      }
+    });
+};
 
   return (
     <div>
@@ -41,15 +70,16 @@ const AddCamera = ({dbUser}) => {
 
             <div className="form-control w-full">
               <label className="label"> <span className="label-text">Title</span> </label>
-              <input {...register("title")} type="text" placeholder="title" className="input input-bordered" />
+              <input {...register("title")} required type="text" placeholder="title" className="input input-bordered" />
             </div>
+
             <div className="form-control mx-4 ">
               <label className="label"> <span className="label-text">Brand Name</span> </label>
-              <input {...register("brand")} type="text" placeholder="brand" className="input input-bordered" />
+              <input {...register("brand")} required type="text" placeholder="brand" className="input input-bordered" />
             </div>
             <div className="form-control">
               <label className="label"> <span className="label-text">Condition</span> </label>
-              <input {...register("condition")} type="text" placeholder="condition" className="input input-bordered" />
+              <input {...register("condition")} required type="text" placeholder="condition" className="input input-bordered" />
             </div>
             </div>
 
@@ -57,15 +87,15 @@ const AddCamera = ({dbUser}) => {
             <div className="flex justify-center">
             <div className="form-control w-full">
               <label className="label"> <span className="label-text"> Location </span> </label>
-              <input {...register("location")} type="text" placeholder="location" className="input input-bordered" />
+              <input {...register("location")} required type="text" placeholder="location" className="input input-bordered" />
             </div>
             <div className="form-control mx-4 ">
               <label className="label"> <span className="label-text">Buying Price</span> </label>
-              <input {...register("buy")} type="number" placeholder="buy" className="input input-bordered" />
+              <input {...register("buy")} required type="number" placeholder="buy" className="input input-bordered" />
             </div>
             <div className="form-control">
               <label className="label"> <span className="label-text">Sale Price</span> </label>
-              <input {...register("sale")} type="number" placeholder="sale" className="input input-bordered" />
+              <input {...register("sale")} required type="number" placeholder="sale" className="input input-bordered" />
             </div>
             </div>
 
@@ -73,19 +103,19 @@ const AddCamera = ({dbUser}) => {
             <div className="flex justify-center">
             <div className="form-control w-full">
               <label className="label"> <span className="label-text">Description</span> </label>
-              <input {...register("des")} type="text" placeholder="description" className="input input-bordered" />
+              <input {...register("des")} required type="text" placeholder="description" className="input input-bordered" />
             </div>
             <div className="form-control mx-4 ">
               <label className="label"> <span className="label-text">Used Duration</span> </label>
-              <input {...register("duration")} type="number" placeholder="duration" className="input input-bordered" />
+              <input {...register("duration")} required type="number" placeholder="duration" className="input input-bordered" />
             </div>
             <div className="form-control">
               <label className="label"> <span className="label-text">Image</span> </label>
-              <input {...register("img")} type="file" placeholder="image" className="input input-bordered" />
+              <input {...register("img")} required type="file" placeholder="image" className="input input-bordered" />
             </div>
             </div>
-
-
+            
+            <label htmlFor="my-modal" className="btn btn-primary btn-sm btn-circle absolute right-2 top-2">✕</label>
             <div className="form-control modal-action mt-6">
               <button htmlFor="my-modal" className="btn btn-primary">Submit</button>
             </div>

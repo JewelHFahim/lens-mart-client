@@ -13,6 +13,7 @@ import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Login/Signup";
 import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
+import PrivateRouter from "./PrivateRouter";
 
 
 const router = createBrowserRouter([
@@ -44,7 +45,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/lens',
-                element: <Lens></Lens>,
+                element: <Lens></Lens>
             },
             {
                 path: '/lens/:id',
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "/dashboard",
-            element: <UserDashboard></UserDashboard>
+            element: <PrivateRouter><UserDashboard></UserDashboard></PrivateRouter>
           },
           {
             path: "/dashboard/allusers",

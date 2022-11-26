@@ -6,7 +6,7 @@ const CameraDetails = () => {
 
   const { user } = useContext(UserContext)
 
-  const details = useLoaderData();
+  const details = useLoaderData().products;
   const { title, img, buy, des, brand, condition, duration, location, sale } = details;
 
   return (
