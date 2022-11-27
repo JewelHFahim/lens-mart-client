@@ -96,7 +96,6 @@ const Signup = () => {
 
           <div>
           <label className="label"><span className="label-text">Join As</span></label>
-
             <select {...register("role")} required className="select select-bordered w-full">
               <option defaultValue={"Buyer"} >Buyer</option>
               <option>Seller</option>

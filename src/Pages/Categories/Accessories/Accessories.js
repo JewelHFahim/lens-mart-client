@@ -26,10 +26,10 @@ const Accessories = () => {
               </h2>
               <div className=" text-left mt-4">
                 <p className="text-lg font-bold text-primary">
-                  Price: ${accessory.sale}
+                  Price: ${accessory.products.sale}
                 </p>
-                <p>Duration: {accessory.duration} mon</p>
-                <p>Location: {accessory.location}</p>
+                <p>Duration: {accessory.products.duration} year</p>
+                <p>Location: {accessory.products.location}</p>
               </div>
 
               <div className="card-actions justify-end">

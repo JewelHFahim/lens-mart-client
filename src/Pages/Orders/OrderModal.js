@@ -10,7 +10,7 @@ const { register, handleSubmit } = useForm();
 const {user} = useContext(UserContext);
 
 const details = useLoaderData().products;
-const { title, sale, _id, img } = details;
+const { title, sale, img } = details;
 
 
 const handleOrder = (data, event) => {
@@ -22,7 +22,6 @@ const handleOrder = (data, event) => {
 };
 
 const savetoDB = (name, email, phone, location, form) =>{
-  // const order = { buyer_name: name, buyer_email: email,  phone, location, title, sale, _id, img};
   const order = { name, email,  phone, location, title, sale, img};
 
   fetch(`http://localhost:5000/orders`,{

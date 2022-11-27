@@ -16,7 +16,7 @@ const SellerDashboard = () => {
     return (
         <div className='border border-green-400 text-center'>
             
-            <h1 className=' text-3xl my-10'>hello </h1>
+            <h1 className=' text-3xl my-10'>Add Products </h1>
 
             <label htmlFor="my-camera" className="btn">+ Cameras</label>
             <label htmlFor="my-lens" className='btn mx-2'>+ Lens</label>

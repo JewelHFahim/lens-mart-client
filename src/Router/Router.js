@@ -9,8 +9,10 @@ import Lens from "../Pages/Categories/Lens/Lens";
 import LensDetails from "../Pages/Categories/Lens/LensDetails";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import AllOrders from "../Pages/Dashboard/AdminDashboard/AllOrders";
+import MyProducts from "../Pages/Dashboard/SellerDashboard/MyProducts";
 import SellerDashboard from "../Pages/Dashboard/SellerDashboard/SellerDashboard";
-import UserDashboard from "../Pages/Dashboard/UserDashboard";
+import SellerOrders from "../Pages/Dashboard/SellerDashboard/SellerOrders";
+import MyOrders from "../Pages/Dashboard/UserDashboard/MyOrders";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Login/Signup";
@@ -18,86 +20,110 @@ import OrderModal from "../Pages/Orders/OrderModal";
 import ErrorPage from "../Pages/Shared/ErrorPage/ErrorPage";
 import PrivateRouter from "./PrivateRouter";
 
-
 const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Main></Main>,
-        errorElement: <ErrorPage></ErrorPage>,
-        children: [
-            {
-                path: '/',
-                element: <Home></Home>
-            },
-            {
-                path: '/login',
-                element: <Login></Login>
-            },
-            {
-                path: '/signup',
-                element: <Signup></Signup>
-            },
-            {
-                path: '/cameras',
-                element: <Cameras></Cameras>
-            },
-            {
-                path: '/cameras/:id',
-                element: <CameraDetails></CameraDetails>,
-                loader: ({params})=> fetch(`http://localhost:5000/cameras/${params.id}`)
-            },
-            {
-                path: '/lens',
-                element: <Lens></Lens>
-            },
-            {
-                path: '/lens/:id',
-                element: <LensDetails></LensDetails>,
-                loader: ({params})=> fetch(`http://localhost:5000/lens/${params.id}`)
-            },
-            {
-                path: '/accessories',
-                element: <Accessories></Accessories>,
-            },
-            {
-                path: '/accessories/:id',
-                element: <AccessoriesDetails></AccessoriesDetails>,
-                loader: ({params})=> fetch(`http://localhost:5000/accessories/${params.id}`)
-            }
-        ]
-    },
-    {
+  {
+    path: "/",
+    element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/signup",
+        element: <Signup></Signup>,
+      },
+      {
+        path: "/cameras",
+        element: <Cameras></Cameras>,
+      },
+      {
+        path: "/cameras/:id",
+        element: <CameraDetails></CameraDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/cameras/${params.id}`),
+      },
+      {
+        path: "/lens",
+        element: <Lens></Lens>,
+      },
+      {
+        path: "/lens/:id",
+        element: <LensDetails></LensDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/lens/${params.id}`),
+      },
+      {
+        path: "/accessories",
+        element: <Accessories></Accessories>,
+      },
+      {
+        path: "/accessories/:id",
+        element: <AccessoriesDetails></AccessoriesDetails>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/accessories/${params.id}`),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
         path: "/dashboard",
-        element: <DashboardLayout></DashboardLayout>,
-        errorElement: <ErrorPage></ErrorPage>,
-        children: [
-          {
-            path: "/dashboard",
-            element: <PrivateRouter><UserDashboard></UserDashboard></PrivateRouter>
-          },
-          {
-            path: "/dashboard/seller",
-            element: <PrivateRouter><SellerDashboard></SellerDashboard></PrivateRouter>
-          },
-          {
-            path: 'dashboard/cameras/:id',
-            element: <PrivateRouter><OrderModal></OrderModal></PrivateRouter>,
-            loader: ({params})=> fetch(`http://localhost:5000/dashboard/cameras/${params.id}`)
-        },
-
-        {
-            path: "/dashboard/admin",
-            element: <PrivateRouter><AdminDashboard></AdminDashboard></PrivateRouter>
-        },
-        {
-            path: "/dashboard/admin/allorders",
-            element: <AllOrders></AllOrders>
-        }
-
-
-        ],
+        element: (
+          <PrivateRouter>
+            <MyOrders></MyOrders>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/dashboard/addproducts",
+        element: (
+          <PrivateRouter>
+            <SellerDashboard></SellerDashboard>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/dashboard/myproducts",
+        element: <MyProducts></MyProducts>
+      },
+      {
+        path: "/dashboard/sellerorders",
+        element: <SellerOrders></SellerOrders>
+      },
+      {
+        path: "dashboard/cameras/:id",
+        element: (
+          <PrivateRouter>
+            <OrderModal></OrderModal>
+          </PrivateRouter>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/dashboard/cameras/${params.id}`),
       },
 
-])
+      {
+        path: "/dashboard/admin",
+        element: (
+          <PrivateRouter>
+            <AdminDashboard></AdminDashboard>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/dashboard/admin/allorders",
+        element: <AllOrders></AllOrders>,
+      },
+    ],
+  },
+]);
 
 export default router;

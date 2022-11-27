@@ -1,12 +1,14 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { UserContext } from "../../../Context/AuthContext";
 
-const AddLens = ({dbUser}) => {
-
+  const AddLens = ({dbUser}) => {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const { _id } = dbUser;
+  const {user} = useContext(UserContext);
 
 
 const imgHostKey = process.env.REACT_APP_imgbb_key;
@@ -29,6 +31,7 @@ const handleAddLens = (data, event) => {
         console.log(imgData.data.url);
         const product = {
           _id,
+          seller: user.displayName,
           title: data.title,
           des: data.des,
           brand: data.brand,
@@ -68,20 +71,30 @@ const handleAddLens = (data, event) => {
             {/* 1st row */}
             <div className="flex justify-center">
 
-            <div className="form-control w-full">
+            <div className="form-control w-2/4">
               <label className="label"> <span className="label-text">Title</span> </label>
               <input {...register("title")} required type="text" placeholder="title" className="input input-bordered" />
             </div>
 
-            <div className="form-control mx-4 ">
+            <div className="form-control mx-4 w-1/4">
               <label className="label"> <span className="label-text">Brand Name</span> </label>
               <input {...register("brand")} required type="text" placeholder="brand" className="input input-bordered" />
             </div>
-            <div className="form-control">
-              <label className="label"> <span className="label-text">Condition</span> </label>
-              <input {...register("condition")} required type="text" placeholder="condition" className="input input-bordered" />
+
+           
+            <div className="w-1/4">
+          <label className="label"><span className="label-text">Condition</span></label>
+            <select {...register("condition")} resource required className="select select-bordered w-full">
+              <option defaultValue={"Good"} disabled selected >Select</option>
+              <option>Excellent</option>
+              <option>Good</option>
+              <option>Fair</option>
+            </select>
+          </div>
+
             </div>
-            </div>
+
+            
 
             {/* 2nd row */}
             <div className="flex justify-center">

@@ -1,14 +1,16 @@
 import { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import { UserContext } from "../../../Context/AuthContext";
+import useBuyer from "../../../Hooks/useBuyer";
 import OrderModal from "../../Orders/OrderModal";
 
 const CameraDetails = () => {
+  const{user} = useContext(UserContext);
+  const [isBuyer] = useBuyer(user?.email);
 
-  const { user } = useContext(UserContext)
 
   const details = useLoaderData().products;
-  const { title, img, buy, des, brand, condition, duration, location, sale } = details;
+  const { title, img, buy, des, brand, condition, duration, location, sale, seller } = details;
 
   return (
     <div className="hero  my-10">
@@ -28,11 +30,17 @@ const CameraDetails = () => {
           <p className="pb-2 font-semibold"> Brand: {brand} </p>
           <p className="pb-2 font-semibold"> Duration: {duration} month</p>
           <p className="pb-2 font-semibold"> Location: {location} </p>
-          {
-            user?.email && <p className="pb-2 font-semibold"> Seller: {user?.displayName} </p>
-          }
+          <p className="pb-2 font-semibold"> Seller: {seller} </p>
           <p className="pb-2"> {des} </p>
-          <label htmlFor="addProduct" className="btn btn-primary my-6">Book Now</label>
+
+          {
+            isBuyer ?
+            <label htmlFor="addProduct" className="btn btn-primary my-6">Book Now</label>
+            :
+            <div className="tooltip tooltip-right disabled"  data-tip="Admin & Seller Cant Order" >
+            <label className="btn btn-primary my-6 " >Book Now</label>
+            </div>
+          }          
         </div>
       </div>
       <OrderModal></OrderModal>

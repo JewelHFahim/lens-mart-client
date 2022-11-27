@@ -1,13 +1,16 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { UserContext } from "../../../Context/AuthContext";
 
 const AddCamera = ({dbUser}) => {
 
+  const {user} = useContext(UserContext)
+
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const { _id } = dbUser;
-
+  const { _id, role } = dbUser;
 
 const imgHostKey = process.env.REACT_APP_imgbb_key;
 
@@ -29,6 +32,7 @@ const handleAddCamera = (data, event) => {
         console.log(imgData.data.url);
         const product = {
           _id,
+          seller: user.displayName,
           title: data.title,
           des: data.des,
           brand: data.brand,
@@ -68,32 +72,40 @@ const handleAddCamera = (data, event) => {
             {/* 1st row */}
             <div className="flex justify-center">
 
-            <div className="form-control w-full">
+            <div className="form-control w-2/4">
               <label className="label"> <span className="label-text">Title</span> </label>
               <input {...register("title")} required type="text" placeholder="title" className="input input-bordered" />
             </div>
 
-            <div className="form-control mx-4 ">
+            <div className="form-control w-1/4 mx-4 ">
               <label className="label"> <span className="label-text">Brand Name</span> </label>
               <input {...register("brand")} required type="text" placeholder="brand" className="input input-bordered" />
             </div>
-            <div className="form-control">
-              <label className="label"> <span className="label-text">Condition</span> </label>
-              <input {...register("condition")} required type="text" placeholder="condition" className="input input-bordered" />
-            </div>
+
+
+            <div className="w-1/4">
+          <label className="label"><span className="label-text">Condition</span></label>
+            <select {...register("condition")} resource required className="select select-bordered w-full">
+              <option defaultValue={"Good"} disabled selected >Select</option>
+              <option>Excellent</option>
+              <option>Good</option>
+              <option>Fair</option>
+            </select>
+          </div>
+
             </div>
 
             {/* 2nd row */}
             <div className="flex justify-center">
-            <div className="form-control w-full">
+            <div className="form-control w-2/4">
               <label className="label"> <span className="label-text"> Location </span> </label>
               <input {...register("location")} required type="text" placeholder="location" className="input input-bordered" />
             </div>
-            <div className="form-control mx-4 ">
+            <div className="form-control mx-4 w-1/4 ">
               <label className="label"> <span className="label-text">Buying Price</span> </label>
               <input {...register("buy")} required type="number" placeholder="buy" className="input input-bordered" />
             </div>
-            <div className="form-control">
+            <div className="form-control w-1/4" >
               <label className="label"> <span className="label-text">Sale Price</span> </label>
               <input {...register("sale")} required type="number" placeholder="sale" className="input input-bordered" />
             </div>
@@ -101,17 +113,17 @@ const handleAddCamera = (data, event) => {
 
             {/* 3rd row */}
             <div className="flex justify-center">
-            <div className="form-control w-full">
+            <div className="form-control w-2/4">
               <label className="label"> <span className="label-text">Description</span> </label>
               <input {...register("des")} required type="text" placeholder="description" className="input input-bordered" />
             </div>
-            <div className="form-control mx-4 ">
+            <div className="form-control mx-4 1/4">
               <label className="label"> <span className="label-text">Used Duration</span> </label>
               <input {...register("duration")} required type="number" placeholder="duration" className="input input-bordered" />
             </div>
-            <div className="form-control">
+            <div className="form-control w-1/4">
               <label className="label"> <span className="label-text">Image</span> </label>
-              <input {...register("img")} required type="file" placeholder="image" className="input input-bordered" />
+              <input {...register("img")} required type="file" placeholder="image" className="mt-2" />
             </div>
             </div>
             
