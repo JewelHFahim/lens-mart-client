@@ -1,22 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../Context/AuthContext';
+import React, {  useEffect, useState } from 'react';
 
-const UserDashboard = () => {
-
-
-
-    const {user} = useContext(UserContext);
+const AllOrders = () => {
 
     const [orders, setOrders] = useState([]);
-    useEffect((order, email) => {
-      if ( user?.email) {
-        fetch(
-          `http://localhost:5000/orders?email=${user?.email}`)
+    useEffect(() => {
+        fetch('http://localhost:5000/orders')
           .then((res) =>res.json())
           .then((data) => setOrders(data))
           .catch((error) => console.error(error));
-      }
-    }, [user?.email]);
+    }, []);
 
 
     return (
@@ -41,10 +33,6 @@ const UserDashboard = () => {
     <tbody>
     {
         orders.map(order =>  <tr key = {order._id}>
-
-
-
-
         <th>
           <label>
             <button className='btn btn-sm'>X</button>
@@ -89,4 +77,4 @@ const UserDashboard = () => {
     );
 };
 
-export default UserDashboard;
+export default AllOrders;

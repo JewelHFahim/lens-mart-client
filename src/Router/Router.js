@@ -7,7 +7,8 @@ import CameraDetails from "../Pages/Categories/Cameras/CameraDetails";
 import Cameras from "../Pages/Categories/Cameras/Cameras";
 import Lens from "../Pages/Categories/Lens/Lens";
 import LensDetails from "../Pages/Categories/Lens/LensDetails";
-import AllUser from "../Pages/Dashboard/AllUser";
+import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
+import AllOrders from "../Pages/Dashboard/AdminDashboard/AllOrders";
 import SellerDashboard from "../Pages/Dashboard/SellerDashboard/SellerDashboard";
 import UserDashboard from "../Pages/Dashboard/UserDashboard";
 import Home from "../Pages/Home/Home/Home";
@@ -80,19 +81,20 @@ const router = createBrowserRouter([
           },
           {
             path: 'dashboard/cameras/:id',
-            element: <OrderModal></OrderModal>,
+            element: <PrivateRouter><OrderModal></OrderModal></PrivateRouter>,
             loader: ({params})=> fetch(`http://localhost:5000/dashboard/cameras/${params.id}`)
         },
-          {
-            path: "/dashboard/allusers",
-            element: <AllUser></AllUser>
-          },
 
-        //   {
-        //     path: "/dashboard/allusers",
-        //     element:<AdminRoute><AllUsers></AllUsers></AdminRoute>,
-        //   },
-          
+        {
+            path: "/dashboard/admin",
+            element: <PrivateRouter><AdminDashboard></AdminDashboard></PrivateRouter>
+        },
+        {
+            path: "/dashboard/admin/allorders",
+            element: <AllOrders></AllOrders>
+        }
+
+
         ],
       },
 

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
-import { UserContext } from '../../Context/AuthContext';
+import { UserContext } from '../../../Context/AuthContext';
 
-const AllUser = () => {
+const AdminDashboard = () => {
 
     const { dbUser, loading } = useContext(UserContext);
 
@@ -79,4 +79,4 @@ const AllUser = () => {
     );
 };
 
-export default AllUser;
+export default AdminDashboard;
