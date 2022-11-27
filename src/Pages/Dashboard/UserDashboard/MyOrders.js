@@ -1,12 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../../Context/AuthContext";
+import useAdmin from "../../../Hooks/useAdmin";
+import useBuyer from "../../../Hooks/useBuyer";
+import useSeller from "../../../Hooks/useSeller";
 
 const MyOrders = () => {
   const { user } = useContext(UserContext);
 
+  const [isBuyer] = useBuyer(user?.email)
+  const [isSeller] = useSeller(user?.email)
+  const [isAdmin] = useAdmin(user?.email)
+
   const [orders, setOrders] = useState([]);
-  useEffect(
-    (order, email) => {
+  useEffect(() => {
       if (user?.email) {
         fetch(`http://localhost:5000/orders?email=${user?.email}`)
           .then((res) => res.json())
@@ -19,9 +25,11 @@ const MyOrders = () => {
 
   return (
     <div>
-      <h2 className="text-3xl text-center">My Orders</h2>
+      {
+        isBuyer &&
 
       <div className="overflow-x-auto w-full">
+      <h2 className="text-3xl text-center">My Orders</h2>
         <table className="table w-full">
           <thead>
             <tr>
@@ -64,14 +72,12 @@ const MyOrders = () => {
                   {order.name}
                   <br />
                   <span className="badge badge-ghost badge-sm">
-                    {" "}
                     {order.email}
                   </span>
                 </td>
                 <td>{order.location}</td>
                 <th>
                   <button className="btn btn-ghost btn-xs">
-                    {" "}
                     Phone: {order.phone}
                   </button>
                 </th>
@@ -80,6 +86,24 @@ const MyOrders = () => {
           </tbody>
         </table>
       </div>
+     }
+
+     {
+      isSeller && 
+      <div>
+      <h2 className="text-3xl bg-slate-200 py-5 text-primary text-center my-10">WelCome to Seller Dashboard</h2>
+      </div>
+     }
+
+     {
+      isAdmin && 
+      <div>
+      <h2 className="text-3xl bg-slate-200 py-5 text-primary text-center my-10">WelCome to Admin Dashboard</h2>
+      </div>
+     }
+
+
+
     </div>
   );
 };

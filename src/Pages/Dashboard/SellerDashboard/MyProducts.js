@@ -4,81 +4,91 @@ import { UserContext } from "../../../Context/AuthContext";
 const MyProducts = () => {
   const { user } = useContext(UserContext);
 
-  const [orders, setOrders] = useState([]);
+  // Cameras
+  const [myCameras, setMyCameras] = useState([]);
   useEffect(() => {
-      if (user?.email) {
-        fetch(`http://localhost:5000/orders?email=${user?.email}`)
-          .then((res) => res.json())
-          .then((data) => setOrders(data))
-          .catch((error) => console.error(error));
-      }
-    },
-    [user?.email]
-  );
+    fetch("http://localhost:5000/cameras")
+      .then((res) => res.json())
+      .then((data) => setMyCameras(data));
+  }, []);
+
+  // Lens
+  const [myLens, setMyLens] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/lens")
+      .then((res) => res.json())
+      .then((data) => setMyLens(data));
+  }, []);
+
+  // Accessories
+  const [myAccessories, setMyAccessories] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/accessories")
+      .then((res) => res.json())
+      .then((data) => setMyAccessories(data));
+  }, []);
+
+
 
   return (
-    <div>
-      <h2 className="text-3xl text-center my-5">Added Products</h2>
+    <div className="mb-8">
+      <h2 className="text-3xl text-center text-primary my-5">Added Products</h2>
 
-      <div className="overflow-x-auto w-full">
-        <table className="table w-full">
-          <thead>
-            <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
-              <th>Products</th>
-              <th>Customer</th>
-              <th>Meet Location</th>
-              <th>c. Phone</th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <th>
-                  <label>
-                    <button className="btn btn-sm">X</button>
-                  </label>
-                </th>
-                <td>
-                  <div className="flex items-center space-x-3">
-                    <div className="avatar">
-                      <div className="w-24 mask mask-squircle">
-                        <img
-                          src={order.img}
-                          alt="Avatar Tailwind CSS Component"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="font-bold">{order.title}</div>
-                      <div className="text-sm">${order.sale}</div>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  {order.name}
-                  <br />
-                  <span className="badge badge-ghost badge-sm">
-                    {" "}
-                    {order.email}
-                  </span>
-                </td>
-                <td>{order.location}</td>
-                <th>
-                  <button className="btn btn-ghost btn-xs">
-                    {" "}
-                    Phone: {order.phone}
-                  </button>
-                </th>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+
+      {/* Cameras Section */}
+      <h2 className="text-center text-primary text-lg bg-slate-200 font-semibold py-2">Added Cameras</h2>
+       {
+        myCameras.map((pro) => (
+        <div key={pro._id}>
+            {
+              pro.products.seller === user?.displayName && 
+              <div className="border border-slate-400 my-2 flex items-center justify-center">
+                <img style={{ width: "100px" }} src={pro.products.img} alt="" />
+                <p className="text-lg ml-5 font-medium">{pro.products.title}</p>
+                <p className="text-lg ml-5">Sale Price: <span  className="font-medium"> ${pro.products.sale}</span></p>
+                <p className="text-lg ml-5">Posted Date: <span className="font-medium">{pro.date}</span> </p>
+              </div> 
+            }
+        </div>
+      ))}
+
+
+
+      {/* Lens Section */}
+      <h2 className="text-center text-primary text-lg bg-slate-300 font-semibold py-2 mb-2">Added Lens</h2>
+       {
+        myLens.map((pro) => (
+        <div key={pro._id}>
+            {
+              pro.products.seller === user?.displayName && 
+              <div className="border border-slate-400 my-2 flex items-center justify-center">
+                <img style={{ width: "100px" }} src={pro.products.img} alt="" />
+                <p className="text-lg ml-5 font-medium">{pro.products.title}</p>
+                <p className="text-lg ml-5">Sale Price: <span  className="font-medium"> ${pro.products.sale}</span></p>
+                <p className="text-lg ml-5">Posted Date: <span className="font-medium">{pro.date}</span> </p>
+              </div> 
+            }
+        </div>
+      ))}
+
+
+      {/* Accessories Section */}
+      <h2 className="text-center text-primary text-lg bg-slate-200 font-semibold py-2 mb-2">Added Accessories</h2>
+       {
+        myAccessories.map((pro) => (
+        <div key={pro._id}>
+            {
+              pro.products.seller === user?.displayName && 
+              <div className="border border-slate-400 my-2 flex items-center justify-center">
+                <img style={{ width: "100px" }} src={pro.products.img} alt="" />
+                <p className="text-lg ml-5 font-medium">{pro.products.title}</p>
+                <p className="text-lg ml-5">Sale Price: <span  className="font-medium"> ${pro.products.sale}</span></p>
+                <p className="text-lg ml-5">Posted Date: <span className="font-medium">{pro.date}</span> </p>
+              </div> 
+            }
+        </div>
+      ))}
+
     </div>
   );
 };

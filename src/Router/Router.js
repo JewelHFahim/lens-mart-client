@@ -93,11 +93,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/myproducts",
-        element: <MyProducts></MyProducts>
+        element: <PrivateRouter><MyProducts></MyProducts></PrivateRouter>,
       },
       {
         path: "/dashboard/sellerorders",
-        element: <SellerOrders></SellerOrders>
+        element: <PrivateRouter><SellerOrders></SellerOrders></PrivateRouter>
       },
       {
         path: "dashboard/cameras/:id",
@@ -120,7 +120,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin/allorders",
-        element: <AllOrders></AllOrders>,
+        element: <PrivateRouter><AllOrders></AllOrders></PrivateRouter>,
       },
     ],
   },

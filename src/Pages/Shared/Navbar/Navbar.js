@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
 import logo from "../../../Assets/logo.png";
 import { UserContext } from "../../../Context/AuthContext";
@@ -9,8 +9,11 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        <Navigate to= "/" ></Navigate>
+      })
       .catch((error) => console.log(error));
+      
   };
 
   const menuItems = (
