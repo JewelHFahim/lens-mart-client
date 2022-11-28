@@ -30,9 +30,12 @@ const Navbar = () => {
       <li>
         <Link to="/accessories" >Accessories</Link>
       </li>
-      <li>
+      {
+        user?.email &&
+        <li>
         <Link to="/dashboard" >Dashboard</Link>
       </li>
+      }
     </>
   );
 

@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { UserContext } from "../../../Context/AuthContext";
 import useBuyer from "../../../Hooks/useBuyer";
 import OrderModal from "../../Orders/OrderModal";
@@ -33,13 +33,21 @@ const AccessoriesDetails = () => {
           <p className="pb-2 font-semibold"> Seller: {seller} </p>
           <p className="pb-2"> {des} </p>
           {
+            user?.email ? 
+            <>
+            {
+
             isBuyer ?
             <label htmlFor="addProduct" className="btn btn-primary my-6">Book Now</label>
             :
             <div className="tooltip tooltip-right disabled"  data-tip="Admin & Seller Cant Order" >
-            <label className="btn btn-primary my-6 " >Book Now</label>
+              <label className="btn btn-primary my-6 " >Book Now</label>
             </div>
-          } 
+            }
+            </>
+            :
+            <Link to= "/login" ><label className="btn btn-primary my-6">Book Now</label></Link>
+          }
         </div>
       </div>
       <OrderModal></OrderModal>

@@ -37,7 +37,7 @@ const AdminDashboard = () => {
 
     return (
         <div>
-            <h1 className='text-center text-3xl' > All Users </h1>
+            <h1 className='text-center text-3xl my-5' > All Users </h1>
 
             {
                 <div className="overflow-x-auto">
@@ -45,24 +45,27 @@ const AdminDashboard = () => {
 
     <thead>
       <tr>
+        <th>Sl</th>
         <th>Name</th>
         <th>Email</th>
-        <th>Job</th>
         <th>Role</th>
+        <th>Authorization</th>
         <th>Favorite Color</th>
       </tr>
     </thead>
     <tbody>
     
       {
-        dbUser.map(user => <tr>
+        dbUser.map((user, i) => <tr key = { user.i }>
+
+        <th>{i+1}</th>
         <th>{user.name}</th>
         <td>{user.email}</td>
-        <td>Quality Control Specialist</td>
+        <th>{user.role}</th>
         <td> 
         {
           user?.role !== "admin" && 
-          <button onClick={()=>handleMakeAdmin(user._id)} className='btn btn-sm'>Make Admin</button> 
+          <button onClick={()=>handleMakeAdmin(user._id)} className='btn btn-xs'>Make Admin</button> 
 
         }
         </td>
