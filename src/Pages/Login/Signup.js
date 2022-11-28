@@ -49,7 +49,7 @@ const Signup = () => {
   };
 
   const userSaveToDB = ( name, email, role) => {
-    const user = { name, email, role };
+    const user = { name, email, status: 'verify', role };
 
     fetch("http://localhost:5000/users", {
       method: "POST",

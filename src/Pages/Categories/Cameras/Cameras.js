@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Cameras = () => {
+  
   const [cameras, setCameras] = useState([]);
-
   useEffect(() => {
     fetch("http://localhost:5000/cameras")
       .then((res) => res.json())
@@ -16,6 +16,7 @@ const Cameras = () => {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {cameras.map((camera) => (
           <div key = {camera._id} className="card bg-base-100 shadow-xl">
+
             <figure className="">
               <img src={camera.products.img} alt="" />
             </figure>
@@ -42,7 +43,9 @@ const Cameras = () => {
                 </Link>
               </div>
             </div>
+            
           </div>
+          
         ))}
       </div>
     </div>

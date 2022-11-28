@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../../Context/AuthContext';
 import AddAccessories from '../AddAccessories/AddAccessories';
 import AddCamera from '../AddCamera/AddCamera';
 import AddLens from '../AddLens/AddLens';
 
 const SellerDashboard = () => {
-    const [dbUser, setDbUser] = useState([]);
 
+    const {user} = useContext(UserContext);
+
+    const [dbUser, setDbUser] = useState([]);
     useEffect(()=>{
         fetch("http://localhost:5000/users")
         .then(res => res.json())
@@ -23,13 +26,35 @@ const SellerDashboard = () => {
             <label htmlFor="my-accessories" className='btn mx-2'>+ Accessories</label>
 
             {
-                dbUser.map(dbUser => <AddCamera key={dbUser._id} dbUser={dbUser} ></AddCamera>)
+                dbUser.map(dbUser =>
+
+                <div key={dbUser._id}  >
+                {
+                dbUser.name === user?.displayName && 
+                 <AddCamera dbUser = {dbUser}></AddCamera>
+                }
+                 </div>)
+            }
+
+            {
+                dbUser.map(dbUser =>
+
+                <div key={dbUser._id}  >
+                {
+                dbUser.name === user?.displayName && 
+                 <AddLens dbUser = {dbUser}></AddLens>
+                }
+                 </div>)
             }
             {
-                dbUser.map(dbUser => <AddLens key={dbUser._id} dbUser={dbUser} ></AddLens>)
-            }
-            {
-                dbUser.map(dbUser => <AddAccessories key={dbUser._id} dbUser={dbUser} ></AddAccessories>)
+                dbUser.map(dbUser =>
+
+                <div key={dbUser._id}  >
+                {
+                dbUser.name === user?.displayName && 
+                 <AddAccessories dbUser = {dbUser}></AddAccessories>
+                }
+                 </div>)
             }
         </div>
     );

@@ -8,8 +8,11 @@ import Cameras from "../Pages/Categories/Cameras/Cameras";
 import Lens from "../Pages/Categories/Lens/Lens";
 import LensDetails from "../Pages/Categories/Lens/LensDetails";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
+import AllAdmins from "../Pages/Dashboard/AdminDashboard/AllAdmins";
 import AllOrders from "../Pages/Dashboard/AdminDashboard/AllOrders";
+import AllProducts from "../Pages/Dashboard/AdminDashboard/AllProducts";
 import AllSeller from "../Pages/Dashboard/AdminDashboard/AllSeller";
+import ReportedItems from "../Pages/Dashboard/AdminDashboard/ReportedItems";
 import MyProducts from "../Pages/Dashboard/SellerDashboard/MyProducts";
 import SellerDashboard from "../Pages/Dashboard/SellerDashboard/SellerDashboard";
 import SellerOrders from "../Pages/Dashboard/SellerDashboard/SellerOrders";
@@ -126,6 +129,18 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/admin/allseller",
         element: <PrivateRouter><AllSeller></AllSeller></PrivateRouter>,
+      },
+      {
+        path: "/dashboard/admin/alladmins",
+        element: <PrivateRouter> <AllAdmins></AllAdmins> </PrivateRouter>,
+      },
+      {
+        path: "/dashboard/admin/reports",
+        element: <PrivateRouter> <ReportedItems></ReportedItems> </PrivateRouter>,
+      },
+      {
+        path: "/dashboard/admin/allproducts",
+        element: <PrivateRouter> <AllProducts></AllProducts> </PrivateRouter>,
       },
     ],
   },

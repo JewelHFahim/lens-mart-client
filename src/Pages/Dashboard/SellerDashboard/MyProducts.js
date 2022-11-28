@@ -79,6 +79,7 @@ const MyProducts = () => {
         <div key={pro._id}>
             {
               pro.products.seller === user?.displayName && 
+              
               <div className="border border-slate-400 my-2 flex items-center justify-center">
                 <img style={{ width: "100px" }} src={pro.products.img} alt="" />
                 <p className="text-lg ml-5 font-medium">{pro.products.title}</p>

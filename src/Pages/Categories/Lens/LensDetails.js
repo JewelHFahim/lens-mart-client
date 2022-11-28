@@ -10,7 +10,7 @@ const LensDetails = () => {
   const [isBuyer] = useBuyer(user?.email);
 
   const details = useLoaderData().products;
-  const { title, img, sale, des, brand, condition, duration, location, buy, seller } = details;
+  const { title, img, sale, des, brand, condition, duration, location, buy, seller, status } = details;
 
   return (
     <div className="hero  my-10">
@@ -30,7 +30,14 @@ const LensDetails = () => {
           <p className="pb-2"> Brand: {brand} </p>
           <p className="pb-2"> Duration: {duration} year</p>
           <p className="pb-2"> Location: {location} </p>
-          <p className="pb-2 font-semibold"> Seller: {seller} </p>
+          <div className="pb-2 font-semibold flex items-center"> <span>Seller: {seller}</span> 
+          {
+            status === 'varified' ?
+              <div className="badge badge-primary badge-xs ml-2"></div>
+              :
+              <div className="badge badge-xs ml-2"></div>
+          }
+          </div>
           <p className="pb-2"> {des} </p>
           {
             user?.email ? 

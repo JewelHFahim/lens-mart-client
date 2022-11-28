@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { UserContext } from '../../../Context/AuthContext';
 
-const AllSeller = () => {
+const AllAdmins = () => {
 
     const { dbUser, loading } = useContext(UserContext);
 
-    const handleSeller = (id) => {
+    const handleAdmins = (id) => {
       fetch(`http://localhost:5000/users/${id}`,{
           method: "DELETE",
         })
@@ -30,18 +30,6 @@ const AllSeller = () => {
           }
         });
     };
-
-    const handleVerify = (id) => {
-      fetch(`http://localhost:5000/users/seller/${id}`, {
-        method: "PUT",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.modifiedCount > 0) {
-            toast.success("Verifyed Successful");
-          }
-        });
-    };
   
     if(loading){
       return <progress className="progress w-56"></progress>
@@ -60,7 +48,6 @@ const AllSeller = () => {
         <th>SL</th>
         <th>Name</th>
         <th>Email</th>
-        <th>Role</th>
         <th>Authorization</th>
         <th>Remove</th>
       </tr>
@@ -72,29 +59,20 @@ const AllSeller = () => {
         
         <>
         {
-            user.role === "Seller" &&
+            user.role === "admin" &&
 
         <tr>
         <th>{user.name}</th>
         <td>{user.email}</td>
-        <td>{user.role}</td>
         <td> 
         {
-          user?.role !== "admin" && 
-          <button onClick={()=>handleMakeAdmin(user._id)} className='btn btn-xs'>Make Admin</button> 
-        }
-        </td>
-        
-        <td> 
-        {
-          user?.status !== "varified" ?
-          <button onClick={()=>handleVerify(user._id)} className='btn btn-xs'>Verify</button>
+          user?.role !== "admin" ? 
+          <button onClick={()=>handleMakeAdmin(user._id)} className='btn btn-xs'>Make Admin</button>
           : 
-          <button className='btn btn-xs btn-primary text-white'>Verified</button> 
+          <button disabled className='btn   btn-xs'>Make Admin</button>
         }
         </td>
-
-        <td> <button onClick={()=>handleSeller(user._id)} className='btn btn-sm btn-error'>Delete</button> </td>
+        <td> <button onClick={()=>handleAdmins(user._id)} className='btn btn-sm btn-error'>Delete</button> </td>
       </tr> 
 
         }
@@ -110,4 +88,4 @@ const AllSeller = () => {
     );
 };
 
-export default AllSeller;
+export default AllAdmins;

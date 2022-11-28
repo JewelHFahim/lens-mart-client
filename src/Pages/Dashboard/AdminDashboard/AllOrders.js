@@ -1,4 +1,5 @@
 import React, {  useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 const AllOrders = () => {
 
@@ -10,6 +11,17 @@ const AllOrders = () => {
           .catch((error) => console.error(error));
     }, []);
 
+    const handleOrder = (id) => {
+      fetch(`http://localhost:5000/orders/${id}`,{
+          method: "DELETE",
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            toast.success('Deleted Successfully');
+          }
+        });
+    };
 
     return (
         <div>
@@ -22,20 +34,15 @@ const AllOrders = () => {
       <tr>
   
         <th>SL</th>
-        <th>Remove</th>
         <th>Products</th>
         <th>Customer Details</th>
+        <th>Remove</th>
         </tr>
     </thead>
     <tbody>
     {
         orders.map((order, i) =>  <tr key = {order.i}>
         <th>{i+1}</th>
-        <th>
-          <label>
-            <button className='btn btn-sm'>X</button>
-          </label>
-        </th>
         <td>
           <div className="flex items-center space-x-3">
             <div className="avatar">
@@ -58,6 +65,11 @@ const AllOrders = () => {
           <span className="">{order.phone}</span>
           <br/>
           <span className="">{order.location}</span>
+        </td>
+        <td>
+          <label>
+            <button onClick={()=>handleOrder(order._id)} className='btn btn-sm'>X</button>
+          </label>
         </td>
       </tr>
       )

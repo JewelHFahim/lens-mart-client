@@ -10,7 +10,7 @@ const AddCamera = ({dbUser}) => {
 
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const { _id, role } = dbUser;
+  const { _id, name, email, role, status } = dbUser;
 
 const imgHostKey = process.env.REACT_APP_imgbb_key;
 
@@ -32,6 +32,7 @@ const handleAddCamera = (data, event) => {
         console.log(imgData.data.url);
         const product = {
           _id,
+          status,
           seller: user.displayName,
           title: data.title,
           des: data.des,
@@ -63,11 +64,15 @@ const handleAddCamera = (data, event) => {
 
   return (
     <div>
-    
+      <p>k asce: {name}</p>
       <input type="checkbox" id="my-camera" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box w-11/12 max-w-5xl">
-          <h3 className="font-bold text-lg">Add Camera</h3>
+          <h3 className="font-bold text-lg">Add Camera: {_id}</h3>
+          <h3 className="font-bold text-lg">name: {name} : {user.displayName}</h3>
+          <h3 className="font-bold text-lg">email: {email}</h3>
+          <h3 className="font-bold text-lg">role: {role}</h3>
+          <h3 className="font-bold text-lg">status: {status}</h3>
           <form className="card-body" onSubmit={handleSubmit(handleAddCamera)}>
             {/* 1st row */}
             <div className="flex justify-center">

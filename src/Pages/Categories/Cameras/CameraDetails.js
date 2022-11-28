@@ -10,7 +10,7 @@ const CameraDetails = () => {
 
 
   const details = useLoaderData().products;
-  const { title, img, buy, des, brand, condition, duration, location, sale, seller } = details;
+  const { title, img, buy, des, brand, condition, duration, location, sale, seller, status } = details;
 
   return (
     <div className="hero  my-10">
@@ -28,9 +28,16 @@ const CameraDetails = () => {
           <p className="pb-2 font-semibold"> Original Price: ${buy} </p>
           <p className="pb-2 font-semibold"> Condition: {condition} </p>
           <p className="pb-2 font-semibold"> Brand: {brand} </p>
-          <p className="pb-2 font-semibold"> Duration: {duration} month</p>
+          <p className="pb-2 font-semibold"> Duration: {duration} year</p>
           <p className="pb-2 font-semibold"> Location: {location} </p>
-          <p className="pb-2 font-semibold"> Seller: {seller} </p>
+          <div className="pb-2 font-semibold flex items-center"> <span>Seller: {seller}</span> 
+          {
+            status === 'varified' ?
+              <div className="badge badge-primary badge-xs ml-2"></div>
+              :
+              <div className="badge badge-xs ml-2"></div>
+          }
+          </div>
           <p className="pb-2"> {des} </p>
 
           {
