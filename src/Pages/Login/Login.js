@@ -1,5 +1,5 @@
 import { GoogleAuthProvider } from "firebase/auth";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,9 +7,11 @@ import { UserContext } from "../../Context/AuthContext";
 
 
 const Login = () => {
+
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
+  const [loginError, setLoginError] = useState('');
   
   const { register, handleSubmit } = useForm();
   
@@ -27,10 +29,11 @@ const Login = () => {
         toast.success('Login Success');
         navigate(from, {replace: true});
         form.reset();
-        
-        
     })
-    .catch( error => console.error(error))
+    .catch( error => {
+      console.error(error.message);
+      setLoginError(error.message.replace('Firebase: ', ''));
+    })
   };
 
   const handlegoogleLogin = () =>{
@@ -79,6 +82,7 @@ const Login = () => {
                 New to LensMart? Signup</Link>
             </label>
 
+              <p className="text-error">{loginError}</p>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>

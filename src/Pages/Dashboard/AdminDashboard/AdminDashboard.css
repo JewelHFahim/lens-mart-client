@@ -1,0 +1,33 @@
+tr {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+
+  .seller table {
+    counter-reset: rowNumber;
+  }
+  
+  .seller table tbody tr::before {
+    display: table-cell;
+    counter-increment: rowNumber;
+    content: counter(rowNumber) ".";
+    text-align: left;
+    padding-left: 15px;
+    padding-top: 8px;
+  }
+
+
+  .buyer table {
+    counter-reset: rowNumber;
+  }
+  
+  .buyer table tbody tr::before {
+    display: table-cell;
+    counter-increment: rowNumber;
+    content: counter(rowNumber) ".";
+    text-align: left;
+    padding-left: 15px;
+    padding-top: 8px;
+  }

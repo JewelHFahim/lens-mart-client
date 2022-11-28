@@ -13,26 +13,24 @@ const AllOrders = () => {
 
     return (
         <div>
-            <h2 className='text-3xl text-center'>My Orders</h2>
+            <h2 className='text-3xl text-center my-5 text-primary'>All Orders</h2>
+            <h2 className='text-xl text-center my-2 text-primary'>Total Orders: <span className='ml-2'>{orders.length}</span></h2>
 
             <div className="overflow-x-auto w-full">
   <table className="table w-full">
     <thead>
       <tr>
-        <th>
-          <label>
-            <input type="checkbox" className="checkbox" />
-          </label>
-        </th>
+  
+        <th>SL</th>
+        <th>Remove</th>
         <th>Products</th>
-        <th>Customer</th>
-        <th>Meet Location</th>
-        <th>c. Phone</th>
+        <th>Customer Details</th>
         </tr>
     </thead>
     <tbody>
     {
-        orders.map(order =>  <tr key = {order._id}>
+        orders.map((order, i) =>  <tr key = {order.i}>
+        <th>{i+1}</th>
         <th>
           <label>
             <button className='btn btn-sm'>X</button>
@@ -46,24 +44,21 @@ const AllOrders = () => {
               </div>
             </div>
             <div>
-              <div className="font-bold">{order.title}</div>
+              <div className="font-bold"> {order.title} </div>
               <div className="text-sm"></div>
               <div className="text-sm"></div>
             </div>
           </div>
         </td>
         <td>
-        {order.name}
+        <span className='font-bold'>{order.name}</span>
           <br/>
-          <span className="badge badge-ghost badge-sm"> {order.email}</span>
+          <span className="">{order.email}</span>
+          <br/>
+          <span className="">{order.phone}</span>
+          <br/>
+          <span className="">{order.location}</span>
         </td>
-        <td>{order.location}</td>
-        <th>
-          <button className="btn btn-ghost btn-xs"> Phone: {order.phone}</button>
-        </th>
-
-
-
       </tr>
       )
     }

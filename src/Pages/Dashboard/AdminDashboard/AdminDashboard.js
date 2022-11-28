@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { UserContext } from '../../../Context/AuthContext';
+import './AdminDashboard.css'
 
 const AdminDashboard = () => {
 
     const { dbUser, loading } = useContext(UserContext);
 
-    const handleDeleteDocotor = (id) => {
+    const handleBuyer = (id) => {
       fetch(`http://localhost:5000/users/${id}`,{
           method: "DELETE",
         })
@@ -35,51 +36,57 @@ const AdminDashboard = () => {
       return <progress className="progress w-56"></progress>
   }
 
-    return (
-        <div>
-            <h1 className='text-center text-3xl my-5' > All Users </h1>
+  return (
+    <div>
+        <h1 className='text-center text-3xl my-5' > All Buyer </h1>
 
-            {
-                <div className="overflow-x-auto">
-  <table className="table w-full">
-
-    <thead>
-      <tr>
-        <th>Sl</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Authorization</th>
-        <th>Favorite Color</th>
-      </tr>
-    </thead>
-    <tbody>
-    
-      {
-        dbUser.map((user, i) => <tr key = { user.i }>
-
-        <th>{i+1}</th>
-        <th>{user.name}</th>
-        <td>{user.email}</td>
-        <th>{user.role}</th>
-        <td> 
         {
-          user?.role !== "admin" && 
-          <button onClick={()=>handleMakeAdmin(user._id)} className='btn btn-xs'>Make Admin</button> 
+            <div className="overflow-x-auto buyer">
+<table className="table w-full">
 
-        }
-        </td>
-        <td> <button onClick={()=>handleDeleteDocotor(user._id)} className='btn btn-sm btn-error'>Delete</button> </td>
-      </tr>)
-      }
+<thead>
+  <tr>
+    <th>SL</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Role</th>
+    <th>Authorization</th>
+    <th>Remove</th>
+  </tr>
+</thead>
+<tbody>
 
+  {
+    dbUser.map((user, i) => 
+    
+    <>
+    {
+        user.role === "Buyer" &&
 
-    </tbody>
-  </table>
+    <tr>
+    <th>{user.name}</th>
+    <td>{user.email}</td>
+    <td>{user.role}</td>
+    <td> 
+    {
+      user?.role !== "admin" && 
+      <button onClick={()=>handleMakeAdmin(user._id)} className='btn btn-xs'>Make Admin</button> 
+    }
+    </td>
+    <td> <button onClick={()=>handleBuyer(user._id)} className='btn btn-sm btn-error'>Delete</button> </td>
+  </tr> 
+
+    }
+    </>
+  )
+  }
+
+</tbody>
+</table>
 </div>
-            }
-        </div>
-    );
+        }
+    </div>
+);
 };
 
 export default AdminDashboard;

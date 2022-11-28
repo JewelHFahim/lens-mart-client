@@ -9,6 +9,7 @@ import Lens from "../Pages/Categories/Lens/Lens";
 import LensDetails from "../Pages/Categories/Lens/LensDetails";
 import AdminDashboard from "../Pages/Dashboard/AdminDashboard/AdminDashboard";
 import AllOrders from "../Pages/Dashboard/AdminDashboard/AllOrders";
+import AllSeller from "../Pages/Dashboard/AdminDashboard/AllSeller";
 import MyProducts from "../Pages/Dashboard/SellerDashboard/MyProducts";
 import SellerDashboard from "../Pages/Dashboard/SellerDashboard/SellerDashboard";
 import SellerOrders from "../Pages/Dashboard/SellerDashboard/SellerOrders";
@@ -121,6 +122,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/admin/allorders",
         element: <PrivateRouter><AllOrders></AllOrders></PrivateRouter>,
+      },
+      {
+        path: "/dashboard/admin/allseller",
+        element: <PrivateRouter><AllSeller></AllSeller></PrivateRouter>,
       },
     ],
   },
