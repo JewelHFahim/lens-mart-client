@@ -30,6 +30,9 @@ const Navbar = () => {
       <li>
         <Link to="/accessories" >Accessories</Link>
       </li>
+      <li>
+        <Link to="/blogs" >Blogs</Link>
+      </li>
       {
         user?.email &&
         <li>

@@ -16,13 +16,13 @@ const Accessories = () => {
       <h1 className="text-3xl text-center my-5">Accessories Section</h1>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {accessories.map((accessory) => (
-          <div className="card bg-base-100 shadow-xl">
+          <div className="card bg-base-100 shadow-xl min-h-full">
             <figure className="p-5">
-              <img src={accessory?.products?.img} alt="" />
+              <img style={{ width: "200px" }} src={accessory?.products?.img} alt="" />
             </figure>
-            <div className="px-5 pb-5">
-              <h2 className="card-title justify-center text-neutral">
-                {accessory.title}
+            <div className="mx-5 mb-5">
+            <h2 className="card-title justify-center text-neutral">
+                {accessory.products.title}
               </h2>
               <div className=" text-left mt-4">
                 <p className="text-lg font-bold text-primary">
@@ -34,7 +34,7 @@ const Accessories = () => {
 
               <div className="card-actions justify-end">
                 <Link to={`/accessories/${accessory._id}`}>
-                  <button className="btn btn-outline btn-primary">
+                  <button className="btn btn-outline btn-sm btn-primary">
                     Details
                   </button>
                 </Link>

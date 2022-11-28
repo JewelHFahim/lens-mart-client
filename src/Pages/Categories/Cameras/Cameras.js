@@ -15,10 +15,10 @@ const Cameras = () => {
       <h1 className="text-3xl text-center my-5">Cameras Section</h1>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {cameras.map((camera) => (
-          <div key = {camera._id} className="card bg-base-100 shadow-xl">
+          <div key = {camera._id} className="card bg-base-100  shadow-xl">
 
             <figure className="">
-              <img src={camera.products.img} alt="" />
+              <img style={{ width: "200px" }} src={camera.products.img} alt="" />
             </figure>
             <div className="px-5 pb-5">
               <h2 className="card-title justify-center text-neutral">
@@ -37,7 +37,7 @@ const Cameras = () => {
 
               <div className="card-actions justify-end">
                 <Link to={`/cameras/${camera._id}`}>
-                  <button className="btn btn-outline btn-primary">
+                  <button className="btn btn-outline btn-sm btn-primary">
                     Details
                   </button>
                 </Link>

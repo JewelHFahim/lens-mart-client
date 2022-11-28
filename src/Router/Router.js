@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
+import Blogs from "../Pages/Blogs/Blogs";
 import Accessories from "../Pages/Categories/Accessories/Accessories";
 import AccessoriesDetails from "../Pages/Categories/Accessories/AccessoriesDetails";
 import CameraDetails from "../Pages/Categories/Cameras/CameraDetails";
@@ -71,7 +72,10 @@ const router = createBrowserRouter([
         element: <AccessoriesDetails></AccessoriesDetails>,
         loader: ({ params }) =>
           fetch(`http://localhost:5000/accessories/${params.id}`),
-      },
+      },{
+        path: "/blogs",
+        element: <Blogs></Blogs>
+      }
     ],
   },
   {

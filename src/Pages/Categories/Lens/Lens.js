@@ -18,7 +18,7 @@ const Lens = () => {
         {lenses.map((lens) => (
           <div className="card bg-base-100 shadow-xl">
             <figure className="p-5">
-              <img src={lens.products.img} alt="" />
+              <img style={{ width: "200px" }} src={lens.products.img} alt="" />
             </figure>
             <div className="mx-5 mb-5">
               <h2 className="card-title justify-center text-neutral">
@@ -36,7 +36,7 @@ const Lens = () => {
 
               <div className="card-actions justify-end">
                 <Link to={`/lens/${lens._id}`}>
-                  <button className="btn btn-outline btn-primary">
+                  <button className="btn btn-outline btn-sm btn-primary">
                     Details
                   </button>
                 </Link>

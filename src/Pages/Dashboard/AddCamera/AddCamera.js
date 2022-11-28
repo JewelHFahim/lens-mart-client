@@ -64,7 +64,6 @@ const handleAddCamera = (data, event) => {
 
   return (
     <div>
-      <p>k asce: {name}</p>
       <input type="checkbox" id="my-camera" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box w-11/12 max-w-5xl">
