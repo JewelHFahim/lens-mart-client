@@ -10,7 +10,7 @@ const { register, handleSubmit } = useForm();
 const {user} = useContext(UserContext);
 
 const details = useLoaderData().products;
-const { title, sale, img } = details;
+const { seller, title, sale, img } = details;
 
 
 const handleOrder = (data, event) => {
@@ -22,7 +22,7 @@ const handleOrder = (data, event) => {
 };
 
 const savetoDB = (name, email, phone, location, form) =>{
-  const order = { name, email,  phone, location, title, sale, img};
+  const order = { name, email,  phone, location, title, sale, img, seller,};
 
   fetch(`http://localhost:5000/orders`,{
     method: 'POST',
@@ -36,7 +36,7 @@ const savetoDB = (name, email, phone, location, form) =>{
     console.log(data);
     toast.success("Booking Succes!");
     form.reset();
-    <Navigate to="/camera"></Navigate>
+    <Navigate to="/cameras"></Navigate>
   })
 }
 
@@ -74,9 +74,9 @@ const savetoDB = (name, email, phone, location, form) =>{
 
             <label htmlFor="addProduct" className="btn btn-primary btn-sm btn-circle absolute right-2 top-2">✕</label>
             <div className="form-control modal-action mt-6">
-              <button htmlFor="addProduct" className="btn btn-primary">Submit</button>
+              {/* <lebel htmlFor="addProduct" className="btn btn-primary">Submit</lebel> */}
+              <label htmlFor="addProduct" className="btn btn-primary">Submit</label>
             </div>
-
           </form>
         </div>
       </div>

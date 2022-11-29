@@ -29,15 +29,12 @@ const MyOrders = () => {
         isBuyer &&
 
       <div className="overflow-x-auto w-full">
-      <h2 className="text-3xl text-center">My Orders</h2>
+      <h2 className="text-3xl text-primary text-center mt-5">My Orders</h2>
+      <h2 className="text-xl  text-center mb-3">Total Orders: {orders.length}</h2>
         <table className="table w-full">
           <thead>
             <tr>
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox" />
-                </label>
-              </th>
+            <th></th>
               <th>Products</th>
               <th>Customer</th>
               <th>Meet Location</th>
