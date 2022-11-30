@@ -1,12 +1,13 @@
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCFbyKda37DCw-FHxjc-pqnFzeNAg3zILo",
-  authDomain: "lens-mart.firebaseapp.com",
-  projectId: "lens-mart",
-  storageBucket: "lens-mart.appspot.com",
-  messagingSenderId: "731713197218",
-  appId: "1:731713197218:web:f8c8fa1a2089238934f3fb"
+  apiKey: process.env.REACT_APP_apiKey,
+  authDomain: process.env.REACT_APP_authDomain,
+  projectId: process.env.REACT_APP_projectId,
+  storageBucket: process.env.REACT_APP_storageBucket,
+  messagingSenderId: process.env.REACT_APP_messagingSenderId,
+  appId: process.env.REACT_APP_appId
+
 };
 
 const app = initializeApp(firebaseConfig);

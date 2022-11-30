@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Cameras = () => {
-  
   const [cameras, setCameras] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/cameras")
+    fetch("https://lens-mart-server-jewelhfahim.vercel.app/cameras")
       .then((res) => res.json())
       .then((data) => setCameras(data));
   }, []);
@@ -15,18 +14,21 @@ const Cameras = () => {
       <h1 className="text-3xl text-center my-5">Cameras Section</h1>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {cameras.map((camera) => (
-          <div key = {camera._id} className="card bg-base-100  shadow-xl">
-
+          <div key={camera._id} className="card bg-base-100  shadow-xl">
             <figure className="">
-              <img style={{ width: "200px" }} src={camera.products.img} alt="" />
+              <img
+                style={{ width: "200px" }}
+                src={camera.products.img}
+                alt=""
+              />
             </figure>
             <div className="px-5 pb-5">
               <h2 className="card-title justify-center text-neutral">
                 {camera.products.title}
               </h2>
-              
+
               <div className=" text-left mt-4">
-              <small className="my-1">{camera.date}</small>
+                <small className="my-1">{camera.date}</small>
 
                 <p className="text-lg font-bold text-primary">
                   Price: ${camera.products.sale}
@@ -43,9 +45,7 @@ const Cameras = () => {
                 </Link>
               </div>
             </div>
-            
           </div>
-          
         ))}
       </div>
     </div>

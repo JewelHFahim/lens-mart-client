@@ -1,18 +1,25 @@
 import { GoogleAuthProvider } from "firebase/auth";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Toaster } from "react-hot-toast";
-import { Link, Navigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/AuthContext";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useToken from "../../Hooks/useToken";
 
 const Signup = () => {
-
   const { register, handleSubmit } = useForm();
   const { createUser, googleLogin, updatedProfile } = useContext(UserContext);
   const googleProvider = new GoogleAuthProvider();
+  const navigate = useNavigate();
 
+  const [createdUserEmail, setCreatedUserEmail] = useState("");
+  const [token] = useToken(createdUserEmail);
+
+  if (token) {
+    navigate("/");
+  }
 
   const hadnleSignup = (data, event) => {
     const form = event.target;
@@ -29,11 +36,10 @@ const Signup = () => {
         };
         updatedProfile(updatedUser)
           .then(() => {
-            userSaveToDB( data.name, data.email, data.role);
+            userSaveToDB(data.name, data.email, data.role);
           })
           .catch((error) => console.log(error));
         form.reset();
-        <Navigate to = "/" ></Navigate>
       })
       .catch((error) => console.error(error));
   };
@@ -48,19 +54,37 @@ const Signup = () => {
       .catch((error) => console.log(error));
   };
 
-  const userSaveToDB = ( name, email, role) => {
-    const user = { name, email, status: 'verify', role };
+  const userSaveToDB = (name, email, role) => {
+    const user = { name, email, status: "verify", role };
 
-    fetch("http://localhost:5000/users", {
+    fetch("https://lens-mart-server-jewelhfahim.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
       body: JSON.stringify(user),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        // getUserToken(email)
+        setCreatedUserEmail(email);
+      });
   };
+
+  // const getUserToken = email =>{
+  //   fetch(`https://lens-mart-server-jewelhfahim.vercel.app/jwt?email=${email}`)
+  //   .then(res=>res.json())
+  //   .then(data=> {
+  //     if(data.accessToken){
+  //       localStorage.setItem("accessToken", data.accessToken);
+  //       navigate('/');
+  //     }
+
+  //   })
+  // }
+
   return (
     <div className=" lg:w-5/12 mx-auto my-10">
       <div className="hero-content flex-col">
@@ -94,13 +118,19 @@ const Signup = () => {
               />
             </div>
 
-          <div>
-          <label className="label"><span className="label-text">Join As</span></label>
-            <select {...register("role")} required className="select select-bordered w-full">
-              <option defaultValue={"Buyer"} >Buyer</option>
-              <option>Seller</option>
-            </select>
-          </div>
+            <div>
+              <label className="label">
+                <span className="label-text">Join As</span>
+              </label>
+              <select
+                {...register("role")}
+                required
+                className="select select-bordered w-full"
+              >
+                <option defaultValue={"Buyer"}>Buyer</option>
+                <option>Seller</option>
+              </select>
+            </div>
 
             <div className="form-control">
               <label className="label">

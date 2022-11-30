@@ -51,7 +51,9 @@ const router = createBrowserRouter([
         path: "/cameras/:id",
         element: <CameraDetails></CameraDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/cameras/${params.id}`),
+          fetch(
+            `https://lens-mart-server-jewelhfahim.vercel.app/cameras/${params.id}`
+          ),
       },
       {
         path: "/lens",
@@ -61,7 +63,9 @@ const router = createBrowserRouter([
         path: "/lens/:id",
         element: <LensDetails></LensDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/lens/${params.id}`),
+          fetch(
+            `https://lens-mart-server-jewelhfahim.vercel.app/lens/${params.id}`
+          ),
       },
       {
         path: "/accessories",
@@ -71,11 +75,14 @@ const router = createBrowserRouter([
         path: "/accessories/:id",
         element: <AccessoriesDetails></AccessoriesDetails>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/accessories/${params.id}`),
-      },{
+          fetch(
+            `https://lens-mart-server-jewelhfahim.vercel.app/accessories/${params.id}`
+          ),
+      },
+      {
         path: "/blogs",
-        element: <Blogs></Blogs>
-      }
+        element: <Blogs></Blogs>,
+      },
     ],
   },
   {
@@ -101,11 +108,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/myproducts",
-        element: <PrivateRouter><MyProducts></MyProducts></PrivateRouter>,
+        element: (
+          <PrivateRouter>
+            <MyProducts></MyProducts>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/sellerorders",
-        element: <PrivateRouter><SellerOrders></SellerOrders></PrivateRouter>
+        element: (
+          <PrivateRouter>
+            <SellerOrders></SellerOrders>
+          </PrivateRouter>
+        ),
       },
       {
         path: "dashboard/cameras/:id",
@@ -115,7 +130,9 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/dashboard/cameras/${params.id}`),
+          fetch(
+            `https://lens-mart-server-jewelhfahim.vercel.app/dashboard/cameras/${params.id}`
+          ),
       },
 
       {
@@ -128,23 +145,46 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/admin/allorders",
-        element: <PrivateRouter><AllOrders></AllOrders></PrivateRouter>,
+        element: (
+          <PrivateRouter>
+            <AllOrders></AllOrders>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/admin/allseller",
-        element: <PrivateRouter><AllSeller></AllSeller></PrivateRouter>,
+        element: (
+          <PrivateRouter>
+            <AllSeller></AllSeller>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/admin/alladmins",
-        element: <PrivateRouter> <AllAdmins></AllAdmins> </PrivateRouter>,
+        element: (
+          <PrivateRouter>
+            {" "}
+            <AllAdmins></AllAdmins>{" "}
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/admin/reports",
-        element: <PrivateRouter> <ReportedItems></ReportedItems> </PrivateRouter>,
+        element: (
+          <PrivateRouter>
+            {" "}
+            <ReportedItems></ReportedItems>{" "}
+          </PrivateRouter>
+        ),
       },
       {
         path: "/dashboard/admin/allproducts",
-        element: <PrivateRouter> <AllProducts></AllProducts> </PrivateRouter>,
+        element: (
+          <PrivateRouter>
+            {" "}
+            <AllProducts></AllProducts>{" "}
+          </PrivateRouter>
+        ),
       },
     ],
   },

@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 const Lens = () => {
   const [lenses, setLenses] = useState([]);
 
-
   useEffect(() => {
-    fetch("http://localhost:5000/lens")
+    fetch("https://lens-mart-server-jewelhfahim.vercel.app/lens")
       .then((res) => res.json())
       .then((data) => setLenses(data));
   }, []);
@@ -25,7 +24,7 @@ const Lens = () => {
                 {lens.products.title}
               </h2>
               <div className=" text-left mt-4">
-              <small className="my-1">{lens.date}</small>
+                <small className="my-1">{lens.date}</small>
 
                 <p className="text-lg font-bold text-primary">
                   Price: ${lens.products.sale}

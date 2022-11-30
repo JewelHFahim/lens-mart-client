@@ -4,9 +4,8 @@ import { Link } from "react-router-dom";
 const Accessories = () => {
   const [accessories, setaccessories] = useState([]);
 
-
   useEffect(() => {
-    fetch("http://localhost:5000/accessories")
+    fetch("https://lens-mart-server-jewelhfahim.vercel.app/accessories")
       .then((res) => res.json())
       .then((data) => setaccessories(data));
   }, []);
@@ -18,10 +17,14 @@ const Accessories = () => {
         {accessories.map((accessory) => (
           <div className="card bg-base-100 shadow-xl min-h-full">
             <figure className="p-5">
-              <img style={{ width: "200px" }} src={accessory?.products?.img} alt="" />
+              <img
+                style={{ width: "200px" }}
+                src={accessory?.products?.img}
+                alt=""
+              />
             </figure>
             <div className="mx-5 mb-5">
-            <h2 className="card-title justify-center text-neutral">
+              <h2 className="card-title justify-center text-neutral">
                 {accessory.products.title}
               </h2>
               <div className=" text-left mt-4">

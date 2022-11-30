@@ -8,14 +8,17 @@ const MyProducts = () => {
   // Cameras
   const [myCameras, setMyCameras] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/cameras")
+    fetch("https://lens-mart-server-jewelhfahim.vercel.app/cameras")
       .then((res) => res.json())
       .then((data) => setMyCameras(data));
   }, []);
 
   const handleDeleteCamera = (id) => {
-    fetch(`http://localhost:5000/cameras/${id}`, {
+    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/cameras/${id}`, {
       method: "DELETE",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -28,13 +31,14 @@ const MyProducts = () => {
   // Lens
   const [myLens, setMyLens] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/lens")
+    fetch("https://lens-mart-server-jewelhfahim.vercel.app/lens")
       .then((res) => res.json())
       .then((data) => setMyLens(data));
   }, []);
   const handleDeleteLens = (id) => {
-    fetch(`http://localhost:5000/lens/${id}`, {
+    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/lens/${id}`, {
       method: "DELETE",
+      authorization: `bearer ${localStorage.getItem("accessToken")}`,
     })
       .then((res) => res.json())
       .then((data) => {
@@ -43,18 +47,21 @@ const MyProducts = () => {
         }
       });
   };
-
 
   // Accessories
   const [myAccessories, setMyAccessories] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/accessories")
+    fetch("https://lens-mart-server-jewelhfahim.vercel.app/accessories")
       .then((res) => res.json())
       .then((data) => setMyAccessories(data));
   }, []);
+
   const handleDeleteAccessories = (id) => {
-    fetch(`http://localhost:5000/accessories/${id}`, {
+    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/accessories/${id}`, {
       method: "DELETE",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
     })
       .then((res) => res.json())
       .then((data) => {
@@ -64,15 +71,13 @@ const MyProducts = () => {
       });
   };
 
-
-
   return (
     <div className="mb-8">
       <h2 className="text-3xl text-center text-primary my-5">My Products</h2>
-
       {/* Cameras Section */}
-
-      <h2 className="text-center text-primary text-lg bg-slate-400 font-semibold py-2">Added Cameras</h2>
+      <h2 className="text-center text-primary text-lg bg-slate-400 font-semibold py-2">
+        Added Cameras
+      </h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -80,33 +85,64 @@ const MyProducts = () => {
               <th>SL</th>
               <th>Products Details</th>
               <th>Customer Details</th>
+              <th>Status</th>
               <th>Remove</th>
             </tr>
           </thead>
           <tbody>
-           {myCameras.map((pro, i) =>  <tr className="hover">
-           {
-              pro.products.seller === user?.displayName && 
-                <>
-                <th></th>
-                <td><img className="w-24 rounded-full" src={pro.products.img} alt="" /> <br />
-                <span className="font-bold" >{pro.products.title} <br /></span> 
-                <span>${pro.products.sale}</span> <br />
-                <span>Date: {pro.date}</span>
-                </td>
-                <td> <button className="btn btn-secondary btn-sm">Advertise</button> <br />
-               </td>
-                <td> <button onClick={()=> handleDeleteCamera(pro._id) } className="btn btn-sm btn-error">Delete</button> </td>
-                </>
-           }
-            </tr>
-            )}
+            {myCameras.map((pro, i) => (
+              <tr className="hover">
+                {pro.products.seller === user?.displayName && (
+                  <>
+                    <th></th>
+                    <td>
+                      <img
+                        className="w-24 rounded-full"
+                        src={pro.products.img}
+                        alt=""
+                      />{" "}
+                      <br />
+                      <span className="font-bold">
+                        {pro.products.title} <br />
+                      </span>
+                      <span> ${pro.products.sale} </span>
+                      <br />
+                      <span>Date: {pro.date} </span>
+                    </td>
+                    <td>
+                      {" "}
+                      <button className="btn btn-secondary btn-sm">
+                        Advertise
+                      </button>{" "}
+                      <br />
+                    </td>
+                    {pro.products.seller === user?.displayName ? (
+                      <td> Avilable</td>
+                    ) : (
+                      <td> Sold </td>
+                    )}
+
+                    <td>
+                      {" "}
+                      <button
+                        onClick={() => handleDeleteCamera(pro._id)}
+                        className="btn btn-sm btn-error"
+                      >
+                        Delete
+                      </button>{" "}
+                    </td>
+                  </>
+                )}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
 
       {/* Lens Section */}
-      <h2 className="text-center text-primary text-lg bg-slate-400 font-semibold py-2">Added Lens</h2>
+      <h2 className="text-center text-primary text-lg bg-slate-400 font-semibold py-2">
+        Added Lens
+      </h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -118,27 +154,51 @@ const MyProducts = () => {
             </tr>
           </thead>
           <tbody>
-           {myLens.map((pro, i) =>  <tr className="hover">
-           {
-              pro.products.seller === user?.displayName && 
-                <>
-                <th></th>
-                <td><img className="w-24 rounded-full" src={pro.products.img} alt="" /> <br />
-                <span className="font-bold" >{pro.products.title} <br /></span> 
-                <span>${pro.products.sale}</span> <br />
-                <span>Date: {pro.date}</span></td>
-                <td> <button className="btn btn-secondary btn-sm">Advertise</button></td>
-                <td> <button onClick={()=> handleDeleteLens(pro._id) } className="btn btn-sm btn-error">Delete</button> </td>
-                </>
-           }
-            </tr>
-            )}
+            {myLens.map((pro, i) => (
+              <tr className="hover">
+                {pro.products.seller === user?.displayName && (
+                  <>
+                    <th></th>
+                    <td>
+                      <img
+                        className="w-24 rounded-full"
+                        src={pro.products.img}
+                        alt=""
+                      />{" "}
+                      <br />
+                      <span className="font-bold">
+                        {pro.products.title} <br />
+                      </span>
+                      <span>${pro.products.sale}</span> <br />
+                      <span>Date: {pro.date}</span>
+                    </td>
+                    <td>
+                      {" "}
+                      <button className="btn btn-secondary btn-sm">
+                        Advertise
+                      </button>
+                    </td>
+                    <td>
+                      {" "}
+                      <button
+                        onClick={() => handleDeleteLens(pro._id)}
+                        className="btn btn-sm btn-error"
+                      >
+                        Delete
+                      </button>{" "}
+                    </td>
+                  </>
+                )}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
 
       {/* Accessories Section */}
-      <h2 className="text-center text-primary text-lg bg-slate-400 font-semibold py-2">Added Accessories</h2>
+      <h2 className="text-center text-primary text-lg bg-slate-400 font-semibold py-2">
+        Added Accessories
+      </h2>
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -150,27 +210,47 @@ const MyProducts = () => {
             </tr>
           </thead>
           <tbody>
-           {myAccessories.map((pro, i) =>  <tr className="hover">
-           {
-              pro.products.seller === user?.displayName && 
-                <>
-                <th></th>
-                <td><img className="w-24 rounded-full" src={pro.products.img} alt="" /> <br />
-                <span className="font-bold" >{pro.products.title} <br /></span> 
-                <span>${pro.products.sale}</span> <br />
-                <span>Date: {pro.date}</span>
-                </td>
-                <td> <button className="btn btn-secondary btn-sm">Advertise</button> <br />
-               </td>
-                <td> <button onClick={()=> handleDeleteAccessories(pro._id) } className="btn btn-sm btn-error">Delete</button> </td>
-                </>
-           }
-            </tr>
-            )}
+            {myAccessories.map((pro, i) => (
+              <tr className="hover">
+                {pro.products.seller === user?.displayName && (
+                  <>
+                    <th></th>
+                    <td>
+                      <img
+                        className="w-24 rounded-full"
+                        src={pro.products.img}
+                        alt=""
+                      />{" "}
+                      <br />
+                      <span className="font-bold">
+                        {pro.products.title} <br />
+                      </span>
+                      <span>${pro.products.sale}</span> <br />
+                      <span>Date: {pro.date}</span>
+                    </td>
+                    <td>
+                      {" "}
+                      <button className="btn btn-secondary btn-sm">
+                        Advertise
+                      </button>{" "}
+                      <br />
+                    </td>
+                    <td>
+                      {" "}
+                      <button
+                        onClick={() => handleDeleteAccessories(pro._id)}
+                        className="btn btn-sm btn-error"
+                      >
+                        Delete
+                      </button>{" "}
+                    </td>
+                  </>
+                )}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
-
     </div>
   );
 };
