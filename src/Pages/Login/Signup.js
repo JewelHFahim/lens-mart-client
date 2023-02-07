@@ -57,7 +57,7 @@ const Signup = () => {
   const userSaveToDB = (name, email, role) => {
     const user = { name, email, status: "verify", role };
 
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/users", {
+    fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -74,7 +74,7 @@ const Signup = () => {
   };
 
   // const getUserToken = email =>{
-  //   fetch(`https://lens-mart-server-jewelhfahim.vercel.app/jwt?email=${email}`)
+  //   fetch(`http://localhost:5000/jwt?email=${email}`)
   //   .then(res=>res.json())
   //   .then(data=> {
   //     if(data.accessToken){

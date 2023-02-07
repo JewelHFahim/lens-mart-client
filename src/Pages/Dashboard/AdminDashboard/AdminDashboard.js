@@ -4,10 +4,10 @@ import { UserContext } from "../../../Context/AuthContext";
 import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
-  const { dbUser, loading } = useContext(UserContext);
 
+  const { dbUser, loading } = useContext(UserContext);
   const handleBuyer = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/users/${id}`, {
+    fetch(`http://localhost:5000/users/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -22,7 +22,7 @@ const AdminDashboard = () => {
   };
 
   const handleMakeAdmin = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/users/admin/${id}`, {
+    fetch(`http://localhost:5000/users/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -76,13 +76,12 @@ const AdminDashboard = () => {
                         )}
                       </td>
                       <td>
-                        {" "}
                         <button
                           onClick={() => handleBuyer(user._id)}
                           className="btn btn-sm btn-error"
                         >
                           Delete
-                        </button>{" "}
+                        </button>
                       </td>
                     </tr>
                   )}

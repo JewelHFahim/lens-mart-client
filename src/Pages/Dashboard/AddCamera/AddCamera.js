@@ -43,7 +43,7 @@ const AddCamera = ({ dbUser }) => {
             sale: data.sale,
             img: imgData.data.url,
           };
-          fetch("https://lens-mart-server-jewelhfahim.vercel.app/cameras", {
+          fetch("http://localhost:5000/cameras", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -166,7 +166,6 @@ const AddCamera = ({ dbUser }) => {
             <div className="flex justify-center">
               <div className="form-control w-2/4">
                 <label className="label">
-                  {" "}
                   <span className="label-text">Description</span>{" "}
                 </label>
                 <input
@@ -179,7 +178,6 @@ const AddCamera = ({ dbUser }) => {
               </div>
               <div className="form-control mx-4 1/4">
                 <label className="label">
-                  {" "}
                   <span className="label-text">Used Duration</span>{" "}
                 </label>
                 <input
@@ -192,7 +190,6 @@ const AddCamera = ({ dbUser }) => {
               </div>
               <div className="form-control w-1/4">
                 <label className="label">
-                  {" "}
                   <span className="label-text">Image</span>{" "}
                 </label>
                 <input

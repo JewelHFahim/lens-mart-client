@@ -6,7 +6,7 @@ const AllSeller = () => {
   const { dbUser, loading } = useContext(UserContext);
 
   const handleSeller = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/users/${id}`, {
+    fetch(`http://localhost:5000/users/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -21,7 +21,7 @@ const AllSeller = () => {
   };
 
   const handleMakeAdmin = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/users/admin/${id}`, {
+    fetch(`http://localhost:5000/users/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -36,15 +36,12 @@ const AllSeller = () => {
   };
 
   const handleVerify = (id) => {
-    fetch(
-      `https://lens-mart-server-jewelhfahim.vercel.app/users/seller/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
-        },
-      }
-    )
+    fetch(`http://localhost:5000/users/seller/${id}`, {
+      method: "PUT",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {

@@ -5,7 +5,7 @@ const Lens = () => {
   const [lenses, setLenses] = useState([]);
 
   useEffect(() => {
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/lens")
+    fetch("http://localhost:5000/lens")
       .then((res) => res.json())
       .then((data) => setLenses(data));
   }, []);
@@ -15,7 +15,7 @@ const Lens = () => {
       <h1 className="text-3xl text-center my-5">Lens Section</h1>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {lenses.map((lens) => (
-          <div className="card bg-base-100 shadow-xl">
+          <div key = {lens._id} className="card bg-base-100 shadow-xl">
             <figure className="p-5">
               <img style={{ width: "200px" }} src={lens.products.img} alt="" />
             </figure>

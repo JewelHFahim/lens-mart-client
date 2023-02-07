@@ -1,17 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const AllProducts = () => {
+
   // Cameras
-  const [cameras, setCameras] = useState([]);
-  useEffect(() => {
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/cameras")
-      .then((res) => res.json())
-      .then((data) => setCameras(data));
-  }, []);
+  const { data: cameras = [], refetch } = useQuery({
+    queryKey: ["cameras"],
+    queryFn: async () => {
+      const res = await fetch("http://localhost:5000/cameras",{
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      const data = await res.json();
+      return data;
+    },
+  });
 
   const handleDeleteCamera = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/cameras/${id}`, {
+    fetch(`http://localhost:5000/cameras/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -21,26 +29,28 @@ const AllProducts = () => {
       .then((data) => {
         if (data.deletedCount > 0) {
           toast.success("Deleted Successfully");
+          refetch();
         }
       });
   };
 
-  // Cameras
+  // Lens Start
   const [lens, setLens] = useState([]);
   useEffect(() => {
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/lens")
+    fetch("http://localhost:5000/lens")
       .then((res) => res.json())
       .then((data) => setLens(data));
   }, []);
 
   const handleDeleteLens = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/lens/${id}`, {
+    fetch(`http://localhost:5000/lens/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.deletedCount > 0) {
           toast.success("Deleted Successfully");
+          refetch();
         }
       });
   };
@@ -48,13 +58,13 @@ const AllProducts = () => {
   // Cameras
   const [accessories, setAccessories] = useState([]);
   useEffect(() => {
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/accessories")
+    fetch("http://localhost:5000/accessories")
       .then((res) => res.json())
       .then((data) => setAccessories(data));
   }, []);
 
   const handleDeleteAccessories = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/accessories/${id}`, {
+    fetch(`http://localhost:5000/accessories/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -64,6 +74,7 @@ const AllProducts = () => {
       .then((data) => {
         if (data.deletedCount > 0) {
           toast.success("Deleted Successfully");
+          refetch();
         }
       });
   };

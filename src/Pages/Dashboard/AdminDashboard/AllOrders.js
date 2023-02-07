@@ -3,24 +3,22 @@ import React from "react";
 import { toast } from "react-toastify";
 
 const AllOrders = () => {
-  const { data: orders = [] } = useQuery({
+  
+  const { data: orders = [], refetch } = useQuery({
     queryKey: ["orders"],
     queryFn: async () => {
-      const res = await fetch(
-        "https://lens-mart-server-jewelhfahim.vercel.app/orders",
-        {
-          headers: {
-            authorization: `bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      );
+      const res = await fetch("http://localhost:5000/orders",{
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
   });
 
   const handleOrder = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/orders/${id}`, {
+    fetch(`http://localhost:5000/orders/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -30,6 +28,7 @@ const AllOrders = () => {
       .then((data) => {
         if (data.deletedCount > 0) {
           toast.success("Deleted Successfully");
+          refetch();
         }
       });
   };

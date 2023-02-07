@@ -41,7 +41,7 @@ const AddAccessories = ({ dbUser }) => {
             sale: data.sale,
             img: imgData.data.url,
           };
-          fetch("https://lens-mart-server-jewelhfahim.vercel.app/accessories", {
+          fetch("http://localhost:5000/accessories", {
             method: "POST",
             headers: {
               "content-type": "application/json",

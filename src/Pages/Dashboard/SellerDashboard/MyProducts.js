@@ -8,13 +8,13 @@ const MyProducts = () => {
   // Cameras
   const [myCameras, setMyCameras] = useState([]);
   useEffect(() => {
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/cameras")
+    fetch("http://localhost:5000/cameras")
       .then((res) => res.json())
       .then((data) => setMyCameras(data));
   }, []);
 
   const handleDeleteCamera = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/cameras/${id}`, {
+    fetch(`http://localhost:5000/cameras/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -31,12 +31,12 @@ const MyProducts = () => {
   // Lens
   const [myLens, setMyLens] = useState([]);
   useEffect(() => {
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/lens")
+    fetch("http://localhost:5000/lens")
       .then((res) => res.json())
       .then((data) => setMyLens(data));
   }, []);
   const handleDeleteLens = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/lens/${id}`, {
+    fetch(`http://localhost:5000/lens/${id}`, {
       method: "DELETE",
       authorization: `bearer ${localStorage.getItem("accessToken")}`,
     })
@@ -51,13 +51,13 @@ const MyProducts = () => {
   // Accessories
   const [myAccessories, setMyAccessories] = useState([]);
   useEffect(() => {
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/accessories")
+    fetch("http://localhost:5000/accessories")
       .then((res) => res.json())
       .then((data) => setMyAccessories(data));
   }, []);
 
   const handleDeleteAccessories = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/accessories/${id}`, {
+    fetch(`http://localhost:5000/accessories/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

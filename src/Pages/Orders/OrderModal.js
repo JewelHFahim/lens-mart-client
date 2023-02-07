@@ -21,7 +21,7 @@ const OrderModal = () => {
   const savetoDB = (name, email, phone, location, form) => {
     const order = { name, email, phone, location, title, sale, img, seller };
 
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/orders", {
+    fetch("http://localhost:5000/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",

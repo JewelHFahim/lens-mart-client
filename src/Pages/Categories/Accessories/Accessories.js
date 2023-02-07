@@ -5,7 +5,7 @@ const Accessories = () => {
   const [accessories, setaccessories] = useState([]);
 
   useEffect(() => {
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/accessories")
+    fetch("http://localhost:5000/accessories")
       .then((res) => res.json())
       .then((data) => setaccessories(data));
   }, []);
@@ -15,7 +15,7 @@ const Accessories = () => {
       <h1 className="text-3xl text-center my-5">Accessories Section</h1>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {accessories.map((accessory) => (
-          <div className="card bg-base-100 shadow-xl min-h-full">
+          <div key = {accessory._id } className="card bg-base-100 shadow-xl min-h-full">
             <figure className="p-5">
               <img
                 style={{ width: "200px" }}

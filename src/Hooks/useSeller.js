@@ -5,14 +5,11 @@ const useSeller = (email) => {
 
   useEffect(() => {
     if (email) {
-      fetch(
-        `https://lens-mart-server-jewelhfahim.vercel.app/users/seller/${email}`,
-        {
-          headers: {
-            authorization: `bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
+      fetch(`http://localhost:5000/users/seller/${email}`, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
         .then((res) => res.json())
         .then((data) => {
           setIsSeller(data.isAdmin);

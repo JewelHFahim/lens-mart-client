@@ -6,13 +6,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div>
       <RouterProvider router={router}></RouterProvider>
-      <ToastContainer 
-        position="top-center"
-        autoClose={500}
-
-      />
+      <ToastContainer position="top-center" autoClose={500}/>
     </div>
   );
 }

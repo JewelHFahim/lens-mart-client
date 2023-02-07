@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
+import BlogDetails from "../Pages/Blogs/BlogDetails";
 import Blogs from "../Pages/Blogs/Blogs";
 import Accessories from "../Pages/Categories/Accessories/Accessories";
 import AccessoriesDetails from "../Pages/Categories/Accessories/AccessoriesDetails";
@@ -51,9 +52,7 @@ const router = createBrowserRouter([
         path: "/cameras/:id",
         element: <CameraDetails></CameraDetails>,
         loader: ({ params }) =>
-          fetch(
-            `https://lens-mart-server-jewelhfahim.vercel.app/cameras/${params.id}`
-          ),
+          fetch(`http://localhost:5000/cameras/${params.id}`),
       },
       {
         path: "/lens",
@@ -63,9 +62,7 @@ const router = createBrowserRouter([
         path: "/lens/:id",
         element: <LensDetails></LensDetails>,
         loader: ({ params }) =>
-          fetch(
-            `https://lens-mart-server-jewelhfahim.vercel.app/lens/${params.id}`
-          ),
+          fetch(`http://localhost:5000/lens/${params.id}`),
       },
       {
         path: "/accessories",
@@ -75,13 +72,16 @@ const router = createBrowserRouter([
         path: "/accessories/:id",
         element: <AccessoriesDetails></AccessoriesDetails>,
         loader: ({ params }) =>
-          fetch(
-            `https://lens-mart-server-jewelhfahim.vercel.app/accessories/${params.id}`
-          ),
+          fetch(`http://localhost:5000/accessories/${params.id}`),
       },
       {
         path: "/blogs",
         element: <Blogs></Blogs>,
+      },
+      {
+        path: "/blogs/:id",
+        loader: ({params})=> fetch(`http://localhost:5000/blogs/${params.id}`),
+        element: <BlogDetails></BlogDetails>,
       },
     ],
   },
@@ -130,9 +130,7 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://lens-mart-server-jewelhfahim.vercel.app/dashboard/cameras/${params.id}`
-          ),
+          fetch(`http://localhost:5000/dashboard/cameras/${params.id}`),
       },
 
       {
@@ -181,8 +179,7 @@ const router = createBrowserRouter([
         path: "/dashboard/admin/allproducts",
         element: (
           <PrivateRouter>
-            {" "}
-            <AllProducts></AllProducts>{" "}
+            <AllProducts></AllProducts>
           </PrivateRouter>
         ),
       },

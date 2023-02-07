@@ -10,7 +10,7 @@ const SellerDashboard = () => {
 
   const [dbUser, setDbUser] = useState([]);
   useEffect(() => {
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/users", {
+    fetch("http://localhost:5000/users", {
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },

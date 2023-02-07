@@ -6,7 +6,7 @@ const AllAdmins = () => {
   const { dbUser, loading } = useContext(UserContext);
 
   const handleAdmins = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/users/${id}`, {
+    fetch(`http://localhost:5000/users/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -21,7 +21,7 @@ const AllAdmins = () => {
   };
 
   const handleMakeAdmin = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/users/admin/${id}`, {
+    fetch(`http://localhost:5000/users/admin/${id}`, {
       method: "PUT",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { UserContext } from "../../../Context/AuthContext";
@@ -12,25 +13,22 @@ const MyOrders = () => {
   const [isSeller] = useSeller(user?.email);
   const [isAdmin] = useAdmin(user?.email);
 
-  const [orders, setOrders] = useState([]);
-  useEffect(() => {
-    if (user?.email) {
-      fetch(
-        `https://lens-mart-server-jewelhfahim.vercel.app/orders?email=${user?.email}`,
-        {
-          headers: {
-            authorization: `bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((data) => setOrders(data))
-        .catch((error) => console.error(error));
-    }
-  }, [user?.email]);
+
+
+  const {
+    data: orders = [], refetch, isLoading } = useQuery({
+    queryKey: ["orders"],
+    queryFn: () => fetch(`http://localhost:5000/orders?email=${user?.email}`,{
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      }
+    })
+    .then((res) => res.json()),
+  });
+
 
   const handleDeleteOrders = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/orders/${id}`, {
+    fetch(`http://localhost:5000/orders/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
@@ -40,10 +38,14 @@ const MyOrders = () => {
       .then((data) => {
         if (data.deletedCount > 0) {
           toast.success("Deleted Successfully");
+          refetch();
         }
       });
   };
-
+  
+  if(isLoading){
+    return <p>Loading...</p>
+  }
   return (
     <div>
       {isBuyer && (

@@ -1,13 +1,14 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Cameras = () => {
   const [cameras, setCameras] = useState([]);
-  useEffect(() => {
-    fetch("https://lens-mart-server-jewelhfahim.vercel.app/cameras")
-      .then((res) => res.json())
-      .then((data) => setCameras(data));
-  }, []);
+  
+  useEffect(()=>{
+    axios.get("http://localhost:5000/cameras")
+    .then(res => setCameras(res.data))
+  },[])
 
   return (
     <div>
@@ -50,6 +51,8 @@ const Cameras = () => {
       </div>
     </div>
   );
+
+
 };
 
 export default Cameras;

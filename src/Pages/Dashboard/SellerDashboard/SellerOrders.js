@@ -7,7 +7,7 @@ const SellerOrders = () => {
 
   const [orders, setOrders] = useState([]);
   useEffect(() => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/orders`, {
+    fetch(`http://localhost:5000/orders`, {
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -18,7 +18,7 @@ const SellerOrders = () => {
   }, []);
 
   const handleDeleteOrders = (id) => {
-    fetch(`https://lens-mart-server-jewelhfahim.vercel.app/orders/${id}`, {
+    fetch(`http://localhost:5000/orders/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,
